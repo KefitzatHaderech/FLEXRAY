@@ -1,103 +1,133 @@
-## FlexRay Buszugriff
+# FlexRay Buszugriff
 
-### Prinzip des Buszugriffs
+## Prinzip des Buszugriffs
 
-In einem FlexRay Cluster wird den [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") auf zwei unterschiedliche Arten der Zugang zum Kommunikationsmedium gewährt: zum einen über das **TDMA-Verfahren** (Time Division Multiple Access) und zum anderen über das **FTDMA-Verfahren** (Flexible Time Division Multiple Access), dessen Kern das TDMA-Verfahren darstellt.
+In einem FlexRay Cluster haben FlexRay Knoten auf zwei unterschiedliche Arten Zugang zum Kommunikationsmedium: zum einen über das TDMA-Verfahren (Time Division Multiple Access) und zum anderen über das FTDMA-Verfahren (Flexible Time Division Multiple Access), dessen Kern das TDMA-Verfahren bildet.
 
-![1706356507935](image/1706356507935.png)
+Beim TDMA-Verfahren liegt ein Kommunikationsplan zugrunde, der in eine Anzahl von gleich langen Zeitschlitzen (statische Slots) unterteilt ist, von denen jedem ein FlexRay Knoten zugeordnet ist. Während des Kommunikationsbetriebs erhalten die FlexRay Knoten gemäß dem Zeitplan Zugang zum Kommunikationsmedium (Bus): Vom ersten bis zum letzten statischen Slot haben die den statischen Slots zugeordneten FlexRay Knoten exklusiven Zugang zum Bus, um die ihnen zugeordneten Botschaften zu übertragen.
 
-Dem **TDMA-Verfahren** liegt ein **Kommunikationsplan** zugrunde, der sich in eine Anzahl von gleich langen Zeitschlitzen ( **statische Slots** ) gliedert, denen jeweils ein [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") zugeordnet ist. Während des Kommunikationsbetriebs wird den [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") der Zugang zum Kommunikationsmedium (Bus) dem Zeitplan nach gewährt: vom ersten bis zum letzten statischen Slot erhalten die den statischen Slots zugeordneten [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") den  **exklusiven Zugang zum Bus** , um die den statischen Slots zugeordneten Botschaften übertragen zu können.
+<img src="image/README/1712921414413.png" alt="drawing" style="max-width:35%;" />
 
-![1706356518873](image/1706356518873.png)
+Der Kommunikationsplan wird zyklisch von allen FlexRay Knoten während des Kommunikationsbetriebs abgearbeitet, sodass alle statischen Botschaften mit einer vorgegebenen Periode, also deterministisch, übertragen werden. Somit definiert der Kommunikationsplan den FlexRay Kommunikationszyklus.
 
-Der Kommunikationsplan wird während des Kommunikationsbetriebs von allen [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") **zyklisch** abgearbeitet, so dass alle statische Botschaften mit vorgegebener Periode, also **deterministisch** übertragen werden. Der Kommunikationsplan definiert folglich nichts anderes als einen [Kommunikationszyklus](https://elearning.vector.com/mod/page/view.php?id=241 "Kommunikationszyklus"), genauer gesagt den  **FlexRay [Kommunikationszyklus](https://elearning.vector.com/mod/page/view.php?id=241 "Kommunikationszyklus")** .
+Für asynchrone Vorgänge oder die sporadische Übertragung von Botschaften ist das TDMA-Verfahren nicht optimal. Daher bietet die FlexRay Technologie die Möglichkeit, den Zyklus um ein dynamisches Segment zu erweitern, falls Botschaften im FlexRay Cluster nicht nur in einem festen Zeitraster, sondern auch bedarfsorientiert übertragen werden sollen.
 
-Für **asynchrone Vorgänge** bzw. für die **sporadische Übertragung** von Botschaften ist das TDMA-Verfahren nicht ideal. Deshalb bietet die FlexRay Technologie die Option, den Zyklus um ein **[dynamisches Segment](https://elearning.vector.com/mod/page/view.php?id=244 "Dynamisches Segment")** zu erweitern, falls in einem FlexRay Cluster Botschaften nicht nur in einem festen Zeitraster übertragen werden sollen, sondern auch bedarfsorientiert.
+<img src="image/README/1712921429512.png" alt="drawing" style="max-width:35%;" />
 
-Der [Kommunikationszyklus](https://elearning.vector.com/mod/page/view.php?id=241 "Kommunikationszyklus") setzt sich dann aus einem statischen und einem dynamischen Segment zusammen. Damit trotz Gewährleistung einer dynamischen Botschaftsübertragung die **deterministische Datenkommunikation** im statischen Segment sichergestellt wird, weist das dynamische Segment ebenfalls eine feste zeitliche Länge auf.
+Der Kommunikationszyklus besteht dann aus einem statischen und einem dynamischen Segment. Um trotz der dynamischen Botschaftsübertragung im dynamischen Segment die deterministische Datenkommunikation im statischen Segment sicherzustellen, hat auch das dynamische Segment eine feste zeitliche Länge.
 
-Dem dynamischen Segment liegt das **FTDMA-Verfahren** zugrunde, welches sich vom TDMA-Verfahren darin unterscheidet, dass die im Kommunikationsplan definierten **dynamischen Botschaften** von den entsprechenden [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") bei Bedarf übertragen werden können. Das heißt, der Zeitpunkt der Botschaftsübertragung ist nicht vorhersehbar. Weil das dynamische Segment eine endliche Länge hat, kann es sogar vorkommen, dass sendewillige [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") ihre dynamische Botschaft gar nicht übertragen können.
+Das FTDMA-Verfahren liegt dem dynamischen Segment zugrunde, das sich vom TDMA-Verfahren dadurch unterscheidet, dass die im Kommunikationsplan definierten dynamischen Botschaften von den entsprechenden FlexRay Knoten bei Bedarf übertragen werden können. Das bedeutet, dass der Zeitpunkt der Botschaftsübertragung nicht vorhersehbar ist. Da das dynamische Segment eine endliche Länge hat, können sendewillige FlexRay Knoten möglicherweise ihre dynamischen Botschaften gar nicht übertragen.
 
-### Kommunikationszyklus
+## Kommunikationszyklus
 
-Die Datenkommunikation in einem FlexRay Cluster erfolgt zyklisch auf der Basis eines Zeitplans. Der **Kommunikationszyklus** setzt sich aus mindestens zwei Zeitsegmenten zusammen, dem **statischen Segment** und dem Segment  **Network Idle Time (NIT)** . Das statische Segment dient der deterministischen Übertragung von Botschaften. Das NIT-Segment wird zur Synchronisierung der lokalen Uhren benötigt. Während des NIT-Segments findet keine Datenkommunikation statt.
+In einem FlexRay Cluster erfolgt die Datenkommunikation zyklisch auf der Grundlage eines Zeitplans. Der Kommunikationszyklus besteht aus mindestens zwei Zeitsegmenten: dem statischen Segment und dem Segment Network Idle Time (NIT). Das statische Segment ermöglicht die deterministische Übertragung von Botschaften, während im NIT-Segment keine Datenkommunikation stattfindet und es zur Synchronisierung der lokalen Uhren dient.
 
-![1706356537981](image/1706356537981.png)
+<img src="image/README/1712921540395.png" alt="drawing" style="max-width:35%;" />
 
-Optional kann der Kommunikationszyklus um das **dynamische Zeitsegment** und um ein **Symbol Window** erweitert werden. Das dynamische Zeitsegment dient der bedarfsorientierten Botschaftsübertragung und folgt im Bedarfsfall stets dem statischen Segment. Das Symbol Window dient zur Übertragung von Symbolen. Über das Collision Avoidance Symbol zeigt ein [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") den Start des ersten Kommunikationszyklus an. Das Media Test Symbol kommt beim Test eines Busguardians und das WakeUp Symbol zum Wecken des FlexRay Clusters zum Einsatz.
+Optional kann der Kommunikationszyklus um das dynamische Zeitsegment und ein Symbol Window erweitert werden. Das dynamische Zeitsegment ermöglicht die bedarfsorientierte Übertragung von Botschaften und folgt bei Bedarf immer dem statischen Segment. Das Symbol Window wird für die Übertragung von Symbolen verwendet, wobei das Collision Avoidance Symbol den Beginn des ersten Kommunikationszyklus anzeigt, das Media Test Symbol für den Test eines Busguardians genutzt wird und das WakeUp Symbol zum Wecken des FlexRay Clusters dient.
 
-![1706356549825](image/1706356549825.png)
+<img src="image/README/1712921551610.png" alt="drawing" style="max-width:35%;" />
 
-Weil nur das statische Segment und das NIT-Segment zwingend für einen Zyklus sind, können vier **Zyklusvarianten** unterschieden werden. Die Grafik „Kommunikationszyklus“ zeigt einen Zyklus, der alle Zeitsegmente aufweist: [statisches Segment](https://elearning.vector.com/mod/page/view.php?id=242 "Statisches Segment"), dynamisches Segment, Symbol Window und NIT.
+Da nur das statische Segment und das NIT-Segment für einen Zyklus obligatorisch sind, können vier Zyklusvarianten unterschieden werden. In der Grafik "Kommunikationszyklus" ist ein Zyklus dargestellt, der alle Zeitsegmente umfasst: statisches Segment, dynamisches Segment, Symbol Window und NIT.
 
-![1706356560108](image/1706356560108.png)
+<img src="image/README/1712921562786.png" alt="drawing" style="max-width:35%;" />
 
-Ein Kommunikationszyklus setzt sich aus einer definierten Anzahl von **Makroticks** zusammen, die den einzelnen Segmenten zugeordnet sind. Gebildet werden die Makroticks aus einer Anzahl von  **Mikroticks** , der kleinsten Zeiteinheit lokaler Uhren. Aufgrund unterschiedlichen Quarzfrequenzen und folglich unterschiedlich langen Mikroticks können sich die Makroticks verschiedener [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") aus unterschiedlich vielen Mikroticks zusammensetzen.
+Ein Kommunikationszyklus besteht aus einer festgelegten Anzahl von Makroticks, die den einzelnen Segmenten zugeordnet sind. Die Makroticks werden aus einer bestimmten Anzahl von Mikroticks gebildet, die die kleinste Zeiteinheit lokaler Uhren darstellen. Aufgrund unterschiedlicher Quarzfrequenzen können sich die Makroticks verschiedener FlexRay Knoten aus unterschiedlich vielen Mikroticks zusammensetzen.
 
-### Statisches Segment
+## Statisches Segment
 
-Dem statischen Segment kommt innerhalb des FlexRay [Kommunikationszyklus](https://elearning.vector.com/mod/page/view.php?id=241 "Kommunikationszyklus") eine herausragende Rolle zu: es stellt die für verteilt realisierte Regelungen so wichtige **äquidistante Datenübertragung** sicher. Garantiert wird dies durch das, dem statischen Segment zugrunde liegende,  **TDMA-Verfahren** .
+Das statische Segment spielt eine entscheidende Rolle im FlexRay-Kommunikationszyklus, da es die äquidistante Datenübertragung sicherstellt, die für verteilte Regelungen so wichtig ist. Dies wird durch das TDMA-Verfahren gewährleistet, das dem statischen Segment zugrunde liegt.
 
-Dieses sieht die Gliederung des statischen Segments in eine Anzahl gleich langer Zeitschlitze ( **statische Slots** ) vor. Die den statischen Slots zugeordneten [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") können während des zyklischen Kommunikationsbetriebs die, den statischen Slots zugeordneten, **statischen Botschaften** übertragen. Vorausgesetzt werden dabei synchronisierte  **lokale Zähler** , die jeweils zu Beginn eines statischen Slots inkrementiert werden. Der Zählerwert korrespondiert mit einer statischen Botschaft und einem [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten").
+<img src="image/README/1712921693441.png" alt="drawing" style="max-width:35%;" />
 
-Die Grafik „Statisches Segment“ zeigt einen Kommunikationsplan für zwei Kanäle ( **Kanal A und Kanal B** ). Im ersten Slot wird dieselbe Botschaft übertragen. Der Ausfall eines Kanals führt somit nicht dazu, dass die Botschaft nicht übertragen wird. Allerdings kann der redundante Kommunikationskanal anstatt zur Erhöhung der Fehlertoleranz auch zur Erhöhung der Datenrate herangezogen werden. Genau dieser Ansatz wird in den weiteren Slots des statischen Segments verfolgt: auf beiden Kanälen werden unterschiedliche Botschaften übertragen. Die Wahl zwischen Fehlertoleranz und erhöhter Datenrate lässt sich für jede einzelne FlexRay Botschaft treffen.
+Das TDMA-Verfahren gliedert das statische Segment in eine Anzahl gleich langer Zeitschlitze (statische Slots). Den einzelnen statischen Slots sind FlexRay-Knoten zugeordnet, die während des zyklischen Kommunikationsbetriebs die entsprechenden statischen Botschaften übertragen können. Dies setzt synchronisierte lokale Zähler voraus, die zu Beginn jedes statischen Slots inkrementiert werden und jeweils einem FlexRay-Knoten und einer statischen Botschaft entsprechen.
 
-![1706356586852](https://file+.vscode-resource.vscode-cdn.net/c%3A/Users/mccat/OneDrive/Doing/EE-Automotive/BUSSYSTEME/image/1706356586852.png)
+In der Grafik "Statisches Segment" ist ein Kommunikationsplan für zwei Kanäle (Kanal A und Kanal B) dargestellt. Im ersten Slot wird dieselbe Botschaft übertragen, was bedeutet, dass ein Kanalausfall nicht dazu führt, dass die Botschaft nicht übertragen wird. In den folgenden Slots des statischen Segments werden jedoch auf beiden Kanälen unterschiedliche Botschaften übertragen. Hier kann der redundante Kommunikationskanal entweder zur Erhöhung der Fehlertoleranz oder zur Steigerung der Datenrate genutzt werden. Diese Wahl kann für jede einzelne FlexRay-Botschaft getroffen werden.
 
-Maximal können bis zu 1023 statische Slots definiert werden. Weil zur Generierung der globalen Zeitbasis mindestens zwei [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") erforderlich sind, muss das statische Segment mindestens zwei statische Slots umfassen.
+Es können maximal bis zu 1023 statische Slots definiert werden. Da mindestens zwei FlexRay-Knoten erforderlich sind, um die globale Zeitbasis zu generieren, muss das statische Segment mindestens zwei statische Slots umfassen.
 
-### Statischer Slot
+## Statischer Slot
 
-Eine reibungslose deterministische Botschaftsübertragung während des statischen Segments setzt voraus, dass der statische Slot lang genug ist. Bestimmt wird die Länge des statischen Slots primär durch die längste  **FlexRay Botschaft** . Grundsätzlich setzt sich eine FlexRay Botschaft aus Header, Payload, Trailer und Steuerzeichen zusammen. Berücksichtigt werden muss auch der sog.  **Channel Idle Delimiter** , welcher das Ende einer FlexRay Botschaft anzeigt.
+Eine reibungslose und deterministische Botschaftsübertragung während des statischen Segments erfordert, dass der statische Slot ausreichend lang ist. Die Länge des statischen Slots wird primär durch die längste FlexRay-Botschaft bestimmt. Eine FlexRay-Botschaft besteht grundlegend aus einem Header, Payload, Trailer und Steuerzeichen. Zudem muss der sogenannte Channel Idle Delimiter berücksichtigt werden, der das Ende einer FlexRay-Botschaft kennzeichnet.
 
-![1706356612866](https://file+.vscode-resource.vscode-cdn.net/c%3A/Users/mccat/OneDrive/Doing/EE-Automotive/BUSSYSTEME/image/1706356612866.png)
+<img src="image/README/1712922841760.png" alt="drawing" style="max-width:35%;" />
 
-Einfluss auf die Länge des statischen Slots nehmen aber auch die größtmögliche  **Signalverzögerung** , erlaubt sind maximal 2,5 Mikrosekunden, und die größtmögliche Zeitabweichung, die zwei beliebige [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") trotz Synchronisation aufweisen können ( **Präzision** ).
+Die Länge des statischen Slots wird auch von der maximalen Signalverzögerung beeinflusst, die höchstens 2,5 Mikrosekunden betragen darf, sowie von der größtmöglichen Zeitabweichung zwischen beliebigen FlexRay-Knoten trotz Synchronisation (Präzision).
 
-Ein statischer Slot setzt sich aus vier Zeitsegmenten zusammen. Dadurch wird sichergestellt, dass eine Botschaft innerhalb des entsprechenden statischen Slots empfangen werden kann, selbst bei maximaler Signalverzögerung und wenn [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") mit einem maximal vorlaufenden und mit einem maximal nachlaufenden lokalen Zeitgeber beteiligt sind.
+Ein statischer Slot ist in vier Zeitsegmente unterteilt. Dies gewährleistet, dass eine Botschaft innerhalb des Slots empfangen werden kann, selbst unter Berücksichtigung maximaler Signalverzögerung und einer möglichen Zeitabweichung zwischen den Knoten.
 
-![1706356623578](https://file+.vscode-resource.vscode-cdn.net/c%3A/Users/mccat/OneDrive/Doing/EE-Automotive/BUSSYSTEME/image/1706356623578.png)
+<img src="image/README/1712922855522.png" alt="drawing" style="max-width:35%;" />
 
-Gestartet wird jeder statische Slot mit einem Offset, dem sog.  **Action Point Offset** . Diese Bezeichnung leitet sich aus dem sog. **Action Point** ab, jener Zeitpunkt, zu dem die Botschaftsübertragung beginnt. Dem Action Point Offset folgen der Action Point und die Botschaftsübertragung. Nach der Botschaftsübertragung, im Anschluss an den Channel Idle Delimiter (11 rezessive Bits), folgt eine Pause ( **Channel Idle** ), deren Dauer logischerweise dem Action Point Offset entspricht. Eine weitere Grafik verdeutlicht diesen Aufbau eines statischen Slots.
+Jeder statische Slot beginnt mit einem Offset, dem sogenannten Action Point Offset, gefolgt vom Action Point und der Botschaftsübertragung. Nach der Botschaftsübertragung und dem Channel Idle Delimiter folgt eine Pause (Channel Idle), deren Dauer dem Action Point Offset entspricht.
 
-Es ist offensichtlich, dass die Präzision und die Signalverzögerung zur maximal erzielbaren Datenrate im FlexRay Cluster umgekehrt proportional zueinander sind: mit zunehmend schlechteren lokalen Taktgebern bzw. größer werdender Signalverzögerung, muss die Zeitspanne zwischen Slotbeginn und Action Point vergrößert werden, was schließlich die maximal erzielbare Datenrate reduziert.
+Es ist offensichtlich, dass die Präzision und die Signalverzögerung eine umgekehrt proportionale Beziehung zur maximal erreichbaren Datenrate im FlexRay-Cluster haben: Bei schlechteren lokalen Taktgebern oder zunehmender Signalverzögerung muss die Zeitspanne zwischen Slotbeginn und Action Point vergrößert werden, was schließlich die maximale Datenrate reduziert.
 
-### Dynamisches Segment
+## Dynamisches Segment
 
-Das dynamische Segment ist optional. Es dient der Übertragung **bedarfsorientierter Botschaften** und unterstützt so  **asynchrone Vorgänge** . Um die deterministische Datenübertragung im statischen Segment nicht zu beeinflussen, weist das dynamische Zeitsegment immer die gleiche Länge auf. Das dynamische Zeitsegment folgt im Bedarfsfall stets auf das statische Segment.
+Das dynamische Segment ist eine optionale Komponente im FlexRay-Protokoll und dient der Übertragung bedarfsorientierter Botschaften, um asynchrone Vorgänge zu unterstützen. Um die deterministische Datenübertragung im statischen Segment nicht zu beeinträchtigen, hat das dynamische Segment stets die gleiche Länge und folgt im Bedarfsfall immer auf das statische Segment.
 
-![1706357087498](image/1706357087498.png)
+Das dynamische Segment basiert auf dem FTDMA-Verfahren (Flexible Time Division Multiple Access), das im Wesentlichen auf dem TDMA-Verfahren aufbaut, jedoch einen flexibleren Kommunikationsablauf ermöglicht. Auch im dynamischen Segment gibt es einen Kommunikationsplan, der jedoch nur die Übertragung der dynamischen Botschaften dann vorsieht, wenn es einen entsprechenden Bedarf gibt.
 
-Dem dynamischen Segment liegt das **FTDMA-Verfahren** (Flexible Time Division Multiple Access) zugrunde, dessen Kern zwar das TDMA-Verfahren darstellt, aber trotzdem einen flexiblen Kommunikationsablauf ermöglicht. Der Kommunikation im dynamischen Segment liegt deshalb auch ein **Kommunikationsplan** zugrunde. Die darin definierten dynamischen Botschaften werden aber nur dann im dynamischen Segment übertragen, wenn es dazu einen Bedarf gibt.
+<img src="image/README/1712922784982.png" alt="drawing" style="max-width:35%;" />
 
-Das dynamische Segment beginnt damit, dass alle [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") ihre **lokalen Zähler** inkrementieren. Der Zählerwert korrespondiert mit einer **dynamischen Botschaft** und einem [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten"). Wenn für die zum Zählerwert korrespondierende dynamische Botschaft keine Sendeanforderung beim entsprechenden FlexRay Knoten vorliegt, dann inkrementieren die [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") ihre Zähler nach der Länge eines  **Minislots** . Der **dynamische Slot** ist in diesem Fall genau ein Minislot lang.
+Die Funktionsweise des dynamischen Segments beginnt damit, dass alle FlexRay-Knoten ihre lokalen Zähler inkrementieren. Jeder Zählerwert entspricht einer dynamischen Botschaft und einem FlexRay-Knoten. Wenn für eine dynamische Botschaft kein Sendebefehl vorliegt, inkrementieren die Knoten ihre Zähler um die Länge eines Minislots, was einem Minislot entspricht.
 
-Liegt dagegen eine Sendeanforderung vor, dann überträgt der entsprechende [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") die zum Zählerwert korrespondierende dynamische Botschaft. Dem dynamischen Slot folgt wieder ein Minislot, was dazu führt, dass die [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") ihre Zähler inkrementieren. Liegt eine Sendeanforderung zum neuen Zählerwert vor, wird die zum Zählerwert gehörende dynamische Botschaft übertragen. Ist dies nicht der Fall, folgt sofort der nächste Minislot.
+Liegt jedoch ein Sendebefehl vor, wird die entsprechende dynamische Botschaft übertragen. Danach folgt wieder ein Minislot, und die Zähler werden inkrementiert. Dieser Vorgang wiederholt sich, bis entweder das dynamische Segment für die Übertragung nicht mehr ausreicht oder alle dynamischen Botschaften übertragen wurden.
 
-Dieses Vorgehen wiederholt sich solange, bis das dynamische Segment für die Übertragung einer dynamischen Botschaft nicht mehr lang genug ist. In diesem Fall findet bis zum Ende des dynamischen Segments keine Datenübertragung mehr statt. Für nicht übertragene dynamische Botschaften steht prinzipiell der nächste Zyklus zur Verfügung. Ihnen steht eine interaktive Grafik zur Verfügung um sich die Datenübertragung im dynamischen Segment klar zu machen. Lesen Sie sich die Anleitung durch, damit Sie die gesamte Funktionalität nutzen können.
+Es besteht ein Zusammenhang zwischen dem Zählerwert und der Übertragungswahrscheinlichkeit: Je höher der Zählerwert, desto unwahrscheinlicher ist die Botschaftsübertragung. Die Botschaft, die dem ersten Minislot oder dem niedrigsten Zählerwert zugeordnet ist, hat die höchste Priorität.
 
-Offensichtlich besteht zwischen dem Zählerwert, der einer dynamischen Botschaft zugeordnet ist, und der Übertragungswahrscheinlichkeit ein Zusammenhang: je höher der Zählerwert, desto unwahrscheinlicher die Botschaftsübertragung. Geschlossen werden kann, das jene Botschaft, die dem ersten Minislot des dynamischen Segments bzw. dem niedrigsten Zählerwert zugeordnet ist, die höchste **Priorität** besitzt.
+Der Systemdesigner muss sicherstellen, dass auch Botschaften mit niedriger Priorität übertragen werden können, sofern kein anderer Bedarf mit höherer Priorität besteht. Zudem muss gewährleistet sein, dass die Übertragung der längsten dynamischen Botschaft möglich ist.
 
-Der Systemdesigner muss schließlich sicherstellen, dass auch dynamische Botschaften mit niedriger Priorität übertragen werden können – zumindest, wenn sonst kein anderer Bedarf mit höherer Priorität vorliegt. Der Systemdesigner hat auch darauf zu achten, dass die Übertragung der längsten dynamischen Botschaft möglich ist.
+## Dynamischer Slot
 
-### Dynamischer Slot
+Für die Gestaltung eines dynamischen Slots gelten im Wesentlichen dieselben Prinzipien wie für die statischen Slots. Daher ähnelt der Aufbau eines dynamischen Slots dem eines statischen Slots. Jeder dynamische Slot beginnt mit dem sogenannten Action Point Offset, der am Action Point endet – dem Zeitpunkt, zu dem die Übertragung einer dynamischen Botschaft beginnt. Der Action Point entspricht dabei dem Action Point des Minislots.
 
-Für die Bemessung eines dynamischen Slots gelten im Grunde die gleichen Bedingungen wie für die Bemessung eines statischen Slots. Deswegen ist ein dynamischer Slot ähnlich aufgebaut wie ein [statischer Slot](https://elearning.vector.com/mod/page/view.php?id=243 "Statischer Slot"). Jeder dynamische Slot beginnt mit dem sog.  **Action Point Offset** . Dieser Offset endet am  **Action Point** , jenem Zeitpunkt, zu dem die Übertragung einer dynamischen Botschaft beginnt. Dieser Action Point entspricht dem Action Point des  **Minislots** .
+<img src="image/README/1712922929365.png" alt="drawing" style="max-width:35%;" />
 
-![1706357107075](image/1706357107075.png)
+Nach dem Action Point Offset folgen der Action Point selbst und die Botschaftsübertragung. Im dynamischen Segment dürfen Botschaften mit unterschiedlich großen Payloads übertragen werden. Die Botschaftsübertragung wird durch den Channel Idle Delimiter abgeschlossen, der wie im statischen Slot aus elf rezessiven Bits besteht.
 
-Dem Action Point Offset folgen der Action Point und die Botschaftsübertragung. Diese ist dadurch gekennzeichnet, dass man im dynamischen Segment Botschaften mit **unterschiedlich großem Payload** übertragen darf. Der Botschaftsübertragung folgt der  **Channel Idle Delimiter** , der sich wie auch im statischen Slot aus elf rezessiven Bits zusammensetzt.
+Es ist zu beachten, dass gemäß der FlexRay-Spezifikation eine dynamische Botschaft genau mit dem nächsten möglichen Action Point enden muss. Um dies zu gewährleisten, wird die Botschaftsübertragung um die sogenannte Dynamic Trailing Sequence verlängert. Theoretisch kann diese Sequenz maximal einen Minislot lang sein.
 
-Beachtet werden muss, dass laut FlexRay Spezifikation eine dynamische Botschaft genau mit dem nächstmöglichen Action Point zu enden hat. Um dies zu garantieren, wird die Botschaftsübertragung um die sog. **Dynamic Trailing Sequence** verlängert. Theoretisch kann diese Sequenz maximal einen Minislot lang sein.
+## Demonstration
 
-### Demonstration
+Um das hybride Buszugriffsverfahren und die entsprechende Datenübertragung zu veranschaulichen, betrachten wir ein FlexRay Cluster mit fünf FlexRay Knoten (A bis E). Diese Knoten sind physisch über eine Linie verbunden, wie in der Grafik "Demo-Cluster" dargestellt. Um das Ausfallrisiko zu minimieren, ist der Kommunikationskanal redundant ausgelegt, sodass zwei Kanäle zur Verfügung stehen: Kanal A und Kanal B.
 
-Zur weiteren Veranschaulichung des **hybriden Buszugriffsverfahrens** und der damit korrespondierenden Datenübertragung wird ein FlexRay Cluster definiert, welcher sich aus fünf **[FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten")** zusammensetzt ([FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") A bis E). Sämtliche [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") sind, wie aus der Grafik „Demo-Cluster“ hervorgeht, physikalisch mittels einer **Linie** verbunden. Zur Minimierung des Ausfallrisikos ist der Kommunikationskanal **redundant** ausgelegt. Zur Datenübertragung stehen somit zwei Kanäle zur Verfügung,  **Kanal A und Kanal B** .
+Der Kommunikationsplan, der der Datenübertragung zugrunde liegt, ist in ein statisches und ein dynamisches Segment unterteilt. Beide Segmente bestehen aus fünf Slots, wobei im statischen Segment die statischen Botschaften und im dynamischen Segment die dynamischen Botschaften definiert sind.
 
-![1706357160298](image/1706357160298.png)
+Während des Kommunikationsbetriebs werden alle im statischen Segment festgelegten statischen Botschaften gemäß dem Kommunikationsplan übertragen. Die im dynamischen Segment festgelegten dynamischen Botschaften werden jedoch nur dann übertragen, wenn ein Bedarf dafür besteht.
 
-Der, der Datenübertragung zugrunde liegende, **Kommunikationsplan** ist in ein **statisches und [dynamisches Segment](https://elearning.vector.com/mod/page/view.php?id=244 "Dynamisches Segment")** unterteilt. Beide Segmente umfassen fünf  **Slots** . Im statischen Segment sind die  **statischen Botschaften** , im dynamischen Segment die **dynamischen Botschaften** aufgeführt.
+Um Ihnen einen Einblick in die Datenkommunikation im FlexRay Cluster zu geben, stehen Ihnen sowohl eine interaktive Grafik als auch eine Animation zur Verfügung. Die interaktive Grafik zeigt die Kommunikationstechnik im dynamischen Segment, während die Animation Ihnen die Kommunikation sowohl im statischen als auch im dynamischen Segment näher bringt. Bitte lesen Sie die entsprechenden Anleitungen, um die volle Funktionalität der Medienobjekte nutzen zu können.
 
-Während des **Kommunikationsbetriebs** werden alle im statischen Segment definierten statischen Botschaften stets dem Kommunikationsplan nach übertragen. Die im dynamischen Segment definierten dynamischen Botschaften werden aber nur dann übertragen, wenn es dazu einen Bedarf gibt.
+<img src="image/README/1712922971705.png" alt="drawing" style="max-width:35%;" />
 
-Ihnen stehen sowohl eine interaktive Grafik als auch eine Animation zur Verfügung, um sich mit der Datenkommunikation im FlexRay Cluster vertraut zu machen. Die interaktive Grafik beleuchtet die Kommunikationstechnik im dynamischen Segment. Mit der Animation haben Sie die Möglichkeit, sich mit der Kommunikation sowohl im statischen als auch dynamischen Segment zu beschäftigen. Lesen Sie sich die jeweiligen Anleitungen durch, damit Sie die gesamte Funktionalität der Medienobjekte nutzen können.
+1. Der Kommunikationsbetrieb startet mit der Übertragung der mit dem ersten statischen Slot korrespondierenden Botschaft mit dem ID=0x01. Diese wird vom FlexRay Knoten A gesendet und vom FlexRay Knoten B empfangen.
+
+<img src="image/README/1712923081848.png" alt="drawing" style="max-width:35%;" />
+
+2. Die Statische Botschaft mit dem ID=0x01 ist übertragen. Der erste statische Slot ist beendet. Es folgt die Übertragung der mit dem zweiten statischen Slot korrespondierenden Botschaft mit dem ID=0x02. Diese wird vom FlexRay Knoten B gesendet und von den FlexRay Knoten C und D empfangen.
+
+<img src="image/README/1712923122648.png" alt="drawing" style="max-width:35%;" />
+
+3. Die Statische Botschaft mit dem ID=0x02 ist übertragen. Der zweite statische Slot ist beendet. Es folgt die Übertragung der mit dem dritten statischen Slot korrespondierenden Botschaft mit dem ID=0x03. Diese wird vom FlexRay Knoten C gesendet und von den FlexRay Knoten A und B empfangen.
+
+<img src="image/README/1712923145478.png" alt="drawing" style="max-width:35%;" />
+
+4. Die Statische Botschaft mit dem ID=0x02 ist übertragen. Der zweite statische Slot ist beendet. Es folgt die Übertragung der mit dem dritten statischen Slot korrespondierenden Botschaft mit dem ID=0x03. Diese wird vom FlexRay Knoten C gesendet und von den FlexRay Knoten A und B empfangen.
+
+<img src="image/README/1712923167400.png" alt="drawing" style="max-width:35%;" />
+
+5. Die Statische Botschaft mit dem ID=0x02 ist übertragen. Der zweite statische Slot ist beendet. Es folgt die Übertragung der mit dem dritten statischen Slot korrespondierenden Botschaft mit dem ID=0x03. Diese wird vom FlexRay Knoten C gesendet und von den FlexRay Knoten A und B empfangen.
+
+<img src="image/README/1712923167400.png" alt="drawing" style="max-width:35%;" />
+
+6. Die Statische Botschaft mit dem ID=0x02 ist übertragen. Der zweite statische Slot ist beendet. Es folgt die Übertragung der mit dem dritten statischen Slot korrespondierenden Botschaft mit dem ID=0x03. Diese wird vom FlexRay Knoten C gesendet und von den FlexRay Knoten A und B empfangen.
+
+<img src="image/README/1712923167400.png" alt="drawing" style="max-width:35%;" />
+
+7. Die Statische Botschaft mit dem ID=0x02 ist übertragen. Der zweite statische Slot ist beendet. Es folgt die Übertragung der mit dem dritten statischen Slot korrespondierenden Botschaft mit dem ID=0x03. Diese wird vom FlexRay Knoten C gesendet und von den FlexRay Knoten A und B empfangen.
+
+<img src="image/README/1712923167400.png" alt="drawing" style="max-width:35%;" />
+
+8. Die Statische Botschaft mit dem ID=0x02 ist übertragen. Der zweite statische Slot ist beendet. Es folgt die Übertragung der mit dem dritten statischen Slot korrespondierenden Botschaft mit dem ID=0x03. Diese wird vom FlexRay Knoten C gesendet und von den FlexRay Knoten A und B empfangen.
+
+<img src="image/README/1712923167400.png" alt="drawing" style="max-width:35%;" />

@@ -1,51 +1,51 @@
-## FlexRay Synchronisation
+# FlexRay Synchronisation
 
-### Synchronisationsprinzip
+## Synchronisationsprinzip
 
-Der reibungslose Ablauf der Datenkommunikation in einem FlexRay Cluster setzt voraus, dass alle [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") **das gleiche Zeitverständnis** haben, weil alle Aktivitäten des Kommunikationssystems durch das Erreichen bestimmter Punkte im Zeitablauf ausgelöst werden.
+Der reibungslose Ablauf der Datenkommunikation in einem FlexRay Cluster erfordert, dass alle FlexRay Knoten das gleiche Zeitverständnis haben. Dies ist wichtig, da alle Aktivitäten des Kommunikationssystems durch das Erreichen bestimmter Zeitpunkte ausgelöst werden.
 
-![1706357307158](image/1706357307158.png)
+<img src="image/README/1712926092250.png" alt="drawing" style="max-width:35%;" />
 
-Sichergestellt werden muss in einem FlexRay Cluster, dass aus der Sicht aller FlexRay Knoten alle Kommunikationszyklen immer zum selben Zeitpunkt beginnen und gleich lang sind. Genauso muss garantiert werden, dass alle statischen Slots der [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") immer an der gleichen Stelle innerhalb des Zyklus beginnen.
+In einem FlexRay Cluster müssen alle Kommunikationszyklen aus der Sicht aller FlexRay Knoten immer zum gleichen Zeitpunkt beginnen und gleich lang sein. Außerdem müssen alle statischen Slots der FlexRay Knoten immer an derselben Stelle innerhalb des Zyklus beginnen.
 
-Voraussetzung dafür ist ein  **globales Zeitverständnis** . Weil ein FlexRay Cluster auf einer **Multi-Master-Architektur** basiert, kann ein solches globales Zeitverständnis nur auf der Basis der lokalen Zeitbasen kooperativ hergestellt werden. Dies stellt eine große Herausforderung dar, weil **Frequenztoleranzen** und Toleranzen der passiven Bauelemente in der Quarzbeschaltung bei identischer Nennfrequenz für **unterschiedliche Frequenzen und Phasen** sorgen.
+Ein globales Zeitverständnis ist daher unerlässlich. Da ein FlexRay Cluster auf einer Multi-Master-Architektur basiert, kann ein solches globales Zeitverständnis nur kooperativ auf der Grundlage der lokalen Zeitbasen erreicht werden. Dies ist eine Herausforderung, da Frequenztoleranzen und Toleranzen der passiven Bauelemente in der Quarzbeschaltung zu unterschiedlichen Frequenzen und Phasen führen, selbst bei identischer Nennfrequenz.
 
-![1706357318801](image/1706357318801.png)
+<img src="image/README/1712926123542.png" alt="drawing" style="max-width:35%;" />
 
-Der FlexRay Spezifikation kann entnommen werden, dass die lokalen Taktgeber über die gesamte Lebensdauer eines Fahrzeugs eine maximale Frequenzabweichung von 1500 ppm nicht überschreiten sollten. Diese Frequenzabweichung trägt erstens Sorge, dass man über eine Laufzeit von zehn Jahren mit Quarztoleranzen von etwa 250 ppm rechnen muss. Zweitens muss man wissen, dass die passiven Bauelemente in der Quarz-Beschaltung in ähnlicher Höhe zur Frequenzabweichung beitragen. Drittens fließt in die maximal erlaubte Frequenzabweichung von 1500 ppm ein ausreichend großer Sicherheitsfaktor ein.
+Laut FlexRay-Spezifikation sollten die lokalen Taktgeber über die gesamte Lebensdauer eines Fahrzeugs eine maximale Frequenzabweichung von 1500 ppm nicht überschreiten. Diese Abweichung berücksichtigt verschiedene Faktoren, darunter Quarztoleranzen von etwa 250 ppm über zehn Jahre, die Beitrag der passiven Bauelemente zur Frequenzabweichung und ein Sicherheitsfaktor.
 
-Es ist offensichtlich, dass ohne regelmäßiges Stellen der lokalen Zeitbasen keine netzwerkweite Zeitbasis hergestellt werden kann. Die [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") verwenden einen speziellen Algorithmus um ihre lokalen Uhren so zu korrigieren, dass alle lokalen Uhren im FlexRay Cluster bis auf eine definierte Abweichung zu einer globalen Uhr synchron laufen. Hierzu kommen zwei Verfahren zum Einsatz: **Phasen- bzw. Offsetkorrektur** und  **Frequenz- bzw. Steigungskorrektur** .
+Ohne regelmäßige Synchronisierung der lokalen Zeitbasen kann keine netzwerkweite Zeitbasis hergestellt werden. Die FlexRay Knoten verwenden spezielle Algorithmen, um ihre lokalen Uhren so zu korrigieren, dass alle lokalen Uhren im FlexRay Cluster bis auf eine definierte Abweichung zu einer globalen Uhr synchron laufen. Dazu kommen Phasen- bzw. Offsetkorrektur- und Frequenz- bzw. Steigungskorrekturverfahren zum Einsatz.
 
-### Phasen- und Frequenzkorrektur
+## Phasen- und Frequenzkorrektur
 
-Die **Phasenkorrektur** sorgt dafür, dass die lokalen Uhren der [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") dieselbe Phase besitzen und so die Kommunikationszyklen stets zeitgleich beginnen. Ohne weitere Korrekturmaßnahmen muss bei der Systemauslegung stets die maximale Abweichung der lokalen Takte zugrunde gelegt werden.
+Die Phasenkorrektur gewährleistet, dass die lokalen Uhren der FlexRay Knoten dieselbe Phase haben und somit die Kommunikationszyklen immer zeitgleich beginnen. Ohne weitere Korrekturmaßnahmen müsste bei der Systemauslegung stets die maximale Abweichung der lokalen Takte berücksichtigt werden.
 
-Dies hieße, bei einer maximalen Abweichung zweier lokaler Uhren von 3000 ppm und einer Zyklusdauer von beispielsweise 10 Millisekunden kämen am Ende des Zyklus 30 Mikrosekunden Drift zusammen, was die maximal mögliche Datenrate erheblich reduzieren würde.
+Angenommen, die maximale Abweichung zweier lokaler Uhren beträgt 3000 ppm und die Zyklusdauer beträgt beispielsweise 10 Millisekunden, würde sich am Ende des Zyklus ein Drift von 30 Mikrosekunden ergeben, was die maximale Datenrate erheblich beeinträchtigen würde.
 
-![1706357345004](image/1706357345004.png)
+Eine Verbesserung der Bandbreiteneffizienz zeitgesteuerter Kommunikationssysteme wird durch den zusätzlichen Einsatz der Frequenzkorrektur erreicht. Während die Phasenkorrektur lediglich die Symptome der Frequenzabweichung behandelt, setzt die Frequenzkorrektur an der Ursache für die Frequenzabweichung an.
 
-Eine Verbesserung der Bandbreiteneffizienz zeitgesteuerter Kommunikationssysteme erreicht man durch den zusätzlichen Einsatz der  **Frequenzkorrektur** . Während die Phasenkorrektur lediglich die Symptome der Frequenzabweichung behandelt, setzt die Frequenzkorrektur an der Ursache für die Frequenzabweichung an.
+Die Frequenz eines Quarzes kann jedoch nicht direkt beeinflusst werden. Daher wird ein Frequenzteiler eingesetzt, um die Quarzfrequenz in die lokale Zeitbasis des FlexRay Knotens umzusetzen. Durch die Änderung des Teilverhältnisses können die lokalen Uhren beschleunigt oder verlangsamt werden, um sicherzustellen, dass die Kommunikationszyklen für alle FlexRay Knoten gleich lang sind.
 
-Dies ist allerdings gar nicht so einfach, weil die Frequenz eines Quarzes nicht direkt beeinflusst werden kann. Deswegen kommt ein Frequenzteiler ins Spiel, der die Quarzfrequenz in die lokale Zeitbasis des FlexRay Knotens umsetzt. Durch die Änderung des Teilverhältnisses können die lokalen Uhren beschleunigt oder gebremst werden, so dass schließlich die Kommunikationszyklen für alle [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") gleich lang sind.
+Durch die Frequenzkorrektur laufen alle lokalen Uhren nahezu mit derselben Geschwindigkeit, wodurch trotz transienter Störungen die Abweichungen der lokalen Uhren innerhalb definierbarer Grenzen bleiben, die für die Synchronisation erforderlichen Synchronisationsbotschaften über mehrere Kommunikationszyklen hinweg. Der Einsatz der Frequenzkorrektur macht die Uhrensynchronisation in einem FlexRay Cluster äußerst robust gegenüber transienten Störungen und ermöglicht die Toleranz des Ausfalls der Uhrensynchronisation über mehrere Kommunikationszyklen hinweg.
 
-Weil durch die Frequenzkorrektur alle lokalen Uhren nahezu mit der gleichen Geschwindigkeit laufen, bleiben trotz transienter Störungen der, zur Synchronisation erforderlichen, Synchronisationsbotschaften über mehrere Kommunikationszyklen hinweg, die Abweichungen der lokalen Uhren innerhalb definierbarer Grenzen. Der Einsatz der Frequenzkorrektur macht die Uhrensynchronisation in einem FlexRay Cluster äußerst robust gegenüber transienter Störungen. Der Ausfall der Uhrensynchronisation kann über mehrere Kommunikationszyklen hinweg toleriert werden.
+<img src="image/README/1712926154104.png" alt="drawing" style="max-width:35%;" />
 
-### Synchronisationsmethode
+## Synchronisationsmethode
 
-Die Synchronisation lokaler Uhren in einem FlexRay Cluster basiert darauf, dass jedem [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") die **Sende- und Empfangszeitpunkte** aller **statischen Botschaften** von vornherein bekannt sind. Damit sind alle Knoten eines FlexRay Clusters in der Lage sowohl den **Offset** als auch die **Steigung** so zu korrigieren, dass schon nach wenigen Zyklen alle [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") jeden [Kommunikationszyklus](https://elearning.vector.com/mod/page/view.php?id=241 "Kommunikationszyklus") zum selben Zeitpunkt mit dem gleichen Takt beginnen.
+Die Synchronisation der lokalen Uhren in einem FlexRay Cluster beruht darauf, dass jedem FlexRay Knoten die Sende- und Empfangszeitpunkte aller statischen Botschaften von Anfang an bekannt sind. Dadurch können alle Knoten des Clusters den Offset und die Steigung so korrigieren, dass nach nur wenigen Zyklen alle FlexRay Knoten jeden Kommunikationszyklus zum selben Zeitpunkt mit dem gleichen Takt beginnen.
 
-In einem FlexRay Cluster fungieren mindestens 2 und maximal 15 [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") als **Sync-Knoten** bzw. **Sync Node** (Synchronisationsknoten), die pro Zyklus eine **Sync-Botschaft** (Synchronisationsbotschaft) in einem definierten **statischen Slot** übertragen. Dabei handelt es sich um keine zusätzlichen Botschaften, sondern um statische Botschaften, bei denen der **Sync Frame Indicator** gesetzt ist.
+In einem FlexRay Cluster fungieren mindestens 2 und maximal 15 FlexRay Knoten als Sync-Knoten oder Sync Node, die pro Zyklus eine Sync-Botschaft in einem definierten statischen Slot übertragen. Diese Sync-Botschaften sind keine zusätzlichen Nachrichten, sondern normale statische Botschaften, bei denen der Sync Frame Indicator gesetzt ist.
 
-![1706357368420](image/1706357368420.png)
+<img src="image/README/1712926196007.png" alt="drawing" style="max-width:35%;" />
 
-Alle [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") vergleichen die a priori bekannten Zeitpunkte mit den Zeitpunkten, zu denen die Sync-Botschaften real eintreffen. Sie erstellen dann eine sortierte Liste von Differenzen, aus denen sie mit dem **Fault Tolerant Midpoint (FTM) Algorithmus** ihren **Offsetkorrekturwert** errechnen.
+Alle FlexRay Knoten vergleichen die vorher bekannten Zeitpunkte mit den tatsächlichen Zeitpunkten, zu denen die Sync-Botschaften eintreffen. Anhand dieser Vergleiche erstellen sie eine sortierte Liste von Differenzen, aus der sie mit dem Fault Tolerant Midpoint (FTM) Algorithmus ihren Offsetkorrekturwert berechnen.
 
-Der FTM-Algorithmus sieht vor, dass die Extremwerte aus der Liste getilgt werden, damit stark abweichende lokale Uhren die Kommunikation im FlexRay Cluster nicht aus dem Tritt bringen. Bei bis zu sieben Sync-Knoten werden Minimum und Maximum gestrichen. Bei mehr als sieben Sync-Knoten fallen auch die zweitgrößten und zweitkleinsten Messwerte heraus.
+Der FTM-Algorithmus eliminiert die Extremwerte aus der Liste, um zu verhindern, dass stark abweichende lokale Uhren die Kommunikation im FlexRay Cluster stören. Bei bis zu sieben Sync-Knoten werden Minimum und Maximum gestrichen. Bei mehr als sieben Sync-Knoten fallen auch die zweitgrößten und zweitkleinsten Messwerte heraus.
 
-Die verbleibenden Messwerte werden addiert und gemittelt - das Ergebnis stellt den Offsetkorrekturwert dar. Die Ermittlung des **Steigungskorrekturwertes** läuft identisch ab, nur mit dem Unterschied, dass die [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") die, den Sync-Botschaften zugrunde liegenden, Zykluslängen messen.
+Die verbleibenden Messwerte werden addiert und gemittelt, und das Ergebnis stellt den Offsetkorrekturwert dar. Die Ermittlung des Steigungskorrekturwerts erfolgt auf ähnliche Weise, wobei die FlexRay Knoten die Zykluslängen messen, die den Sync-Botschaften zugrunde liegen.
 
-![1706357386908](image/1706357386908.png)
+<img src="image/README/1712926219415.png" alt="drawing" style="max-width:35%;" />
 
-Sowohl die Offset- als auch die Steigungskorrektur erfolgt auf der Basis der lokalen Uhren, deren kleinste Einheit der **Mikrotick** darstellt. Einen **Offset** gleicht ein [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") durch das Hinzufügen oder Weglassen einer, dem Offset entsprechenden, Anzahl von Mikroticks in der NIT am Ende jedes ungeraden Zyklus aus. Dadurch verschiebt ein [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") den eigenen Start des nächsten Zyklus und passt sich so an die anderen [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") an.
+Sowohl die Offset- als auch die Steigungskorrektur basieren auf den lokalen Uhren, wobei die kleinste Einheit der Mikrotick ist. Ein FlexRay Knoten gleicht seinen Offset aus, indem er am Ende jedes ungeraden Zyklus eine entsprechende Anzahl von Mikroticks in der NIT hinzufügt oder weglässt. Dadurch verschiebt er den Start seines nächsten Zyklus und passt sich den anderen FlexRay Knoten an.
 
-Damit die **Steigungskorrektur** nicht wie eine Offsetkorrektur wirkt, verteilt ein [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") die dem Steigungskorrekturwert entsprechende Anzahl von Mikroticks gleichmäßig über den folgenden geraden und ungeraden Zyklus. So ist jeder [FlexRay Knoten](https://elearning.vector.com/mod/page/view.php?id=234 "FlexRay Knoten") in der Lage, seinen Zyklus entweder zu verkürzen oder zu verlängern.
+Damit die Steigungskorrektur nicht wie eine Offsetkorrektur wirkt, verteilt ein FlexRay Knoten die Anzahl von Mikroticks, die dem Steigungskorrekturwert entspricht, gleichmäßig über den folgenden geraden und ungeraden Zyklus. So kann jeder FlexRay Knoten seinen Zyklus entweder verkürzen oder verlängern.

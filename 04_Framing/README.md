@@ -1,47 +1,43 @@
-## FlexRay Framing
+# FlexRay Framing
 
-### Frame Header
+## Frame Header
 
-Die Datenübertragung in einem FlexRay Cluster erfolgt mithilfe eines einheitlichen Botschaftsrahmens (FlexRay Botschaft). Jede **FlexRay Botschaft** setzt sich aus drei Teilen zusammen:  **Header** , **Payload** und  **Trailer ** . Der Header setzt sich aus 40 Bits zusammen. Davon gehören elf Bit zum Identifier (ID). Dieser kennzeichnet eine Botschaft und korrespondiert mit einem Slot. Alle IDs können frei genutzt werden. Ausgenommen ist der ID=0x00, dieser dient der Kennzeichnung von ungültigen Botschaften.
+In einem FlexRay Cluster erfolgt die Datenübertragung mithilfe eines einheitlichen Botschaftsrahmens, der als FlexRay Botschaft bezeichnet wird. Eine FlexRay Botschaft besteht aus drei Hauptteilen: dem Header, dem Payload und dem Trailer. Der Header besteht aus insgesamt 40 Bits, wovon elf Bits dem Identifier (ID) zugeordnet sind. Diese ID dient zur Identifizierung einer bestimmten Botschaft und entspricht einem Slot. Alle IDs können frei verwendet werden, mit Ausnahme von ID=0x00, die für ungültige Botschaften reserviert ist.
 
-Dem ID vorangestellt sind  **vier Indikatorbits** , denen wiederum ein reserviertes Bit vorausgeht. Die Indikatorbits dienen zur näheren Spezifizierung einer Botschaft. Der **Payload Preamble Indicator** zeigt an, ob im Payload einer statischen Botschaft ein **Network Management Vector** bzw. im Payload einer dynamischen Botschaft ein **Message Identifier** übertragen wird.
+Vor der ID befinden sich vier Indikatorbits, gefolgt von einem reservierten Bit. Diese Indikatorbits dienen zur weiteren Spezifizierung der Botschaft. Der Payload Preamble Indicator zeigt an, ob im Payload einer statischen Botschaft ein Network Management Vector oder im Payload einer dynamischen Botschaft ein Message Identifier übertragen wird.
 
-![1706357222021](image/1706357222021.png)
+<img src="image/README/1712925848832.png" alt="drawing" style="max-width:35%;" />
 
-In besonderen Fällen kann der Sender die Payload einer Botschaft ausschließlich mit Nullen übertragen. Dabei handelt es sich dann um keinen regulären Payload. Um anzeigen zu können, ob der Payload regulär oder ungültig ist, existiert der  **Null Frame Indicator** . Der **Sync Frame Indicator** gibt an, ob die im statischen Segment übertragene Botschaft als **Sync Frame** im Rahmen der Synchronisation verwendet wird. Der **Startup Frame Indicator** gibt an, ob die im statischen Segment übertragene Botschaft als **Startup Frame** im Rahmen des Startup verwendet wird.
+In speziellen Fällen kann der Sender den Payload einer Botschaft ausschließlich mit Nullen übertragen. In diesem Fall handelt es sich nicht um einen regulären Payload, was durch den Null Frame Indicator angezeigt wird. Der Sync Frame Indicator gibt an, ob die Botschaft, die im statischen Segment übertragen wird, als Sync Frame für die Synchronisation verwendet wird. Der Startup Frame Indicator gibt an, ob die Botschaft, die im statischen Segment übertragen wird, als Startup Frame für den Startvorgang verwendet wird.
 
-Dem Identifier folgt die  **Payload Length** . Sie zeigt die Größe des Payloads in Words an und umfasst 7 Bits. Insgesamt lassen sich mit einer Botschaft 254 Nutzbytes übertragen. Gesichert wird der Identifier mittels  **CRC-Verfahren** . Dabei wird auf der Basis des Identifiers, der Payload Length, des Sync Frame Indicators und des Startup Frame Indicators und einem, durch die FlexRay Spezifikation definierten, Generatorpolynoms eine elf Bit lange **Header CRC Sequence** berechnet, die dann auf die Payload Length folgt.
+Nach dem Identifier folgt die Payload Length, die die Größe des Payloads in Words angibt und aus 7 Bits besteht. Eine FlexRay Botschaft kann insgesamt bis zu 254 Nutzbytes übertragen. Der Identifier wird durch ein CRC-Verfahren gesichert. Hierbei wird basierend auf dem Identifier, der Payload Length, dem Sync Frame Indicator und dem Startup Frame Indicator sowie einem Generatorpolynom, das in der FlexRay Spezifikation definiert ist, eine elf Bit lange Header CRC Sequence berechnet, die dem Payload Length folgt.
 
-Abgeschlossen wird der Header durch den  **Cycle Counter** . Dieser setzt sich aus sechs Bits zusammen und repräsentiert die Nummer des Zyklus, in dem die Botschaft gesendet wird. Der Cycle Counter zählt stets bis 63.
+Der Header wird durch den Cycle Counter abgeschlossen, der aus sechs Bits besteht und die Nummer des Zyklus repräsentiert, in dem die Botschaft gesendet wird. Der Cycle Counter zählt immer bis 63.
 
-### Frame Payload
+## Frame Payload
 
-Maximal können mit einer Botschaft 254 Nutzbytes ( **Payload** ) transportiert werden. Der Parameter **Payload Length** zeigt die Größe des Payloads in Words an. Die Payload Length weist bei allen im statischen Segment übertragenen Botschaften denselben Wert auf. Diesen muss der Systemdesigner während der Konfigurationsphase festlegen. Da **dynamische Botschaften** nicht an eine feste Payloadgröße gebunden sind, kann der Payload Length für solche Botschaften unterschiedliche Werte annehmen.
+Eine FlexRay Botschaft kann maximal 254 Nutzbytes (Payload) transportieren. Die Payload Length, ein Parameter im Header, gibt die Größe des Payloads in Words an. Im statischen Segment haben alle übertragenen Botschaften denselben Payload Length Wert, der vom Systemdesigner während der Konfigurationsphase festgelegt wird. Für dynamische Botschaften kann die Payload Length jedoch unterschiedliche Werte annehmen.
 
-Bei einer im **statischen Segment** übertragenen Botschaft besteht die Möglichkeit, die ersten zwölf Nutzbytes für die Übertragung des **Network Management Vector** zu verwenden. Dazu muss der im Header übertragene **Payload Preamble Indicator** gesetzt werden. Der Network Management Vector steht für die Realisierung des Netzmanagements in einem FlexRay Cluster zur Verfügung.
+Im statischen Segment besteht die Möglichkeit, die ersten zwölf Nutzbytes für die Übertragung des Network Management Vector zu verwenden, wenn der Payload Preamble Indicator im Header gesetzt ist. Der Network Management Vector dient der Realisierung des Netzmanagements in einem FlexRay Cluster.
 
-Wenn der Payload Preamble Indicator bei einer **dynamischen FlexRay Botschaft** gesetzt ist, dann zeigt dies nicht an, dass der Payload mit einem Network Management Vector startet. Bei einer dynamischen Botschaft wird angezeigt, dass es sich bei den ersten beiden Nutzbytes um den **Message Identifier** handelt. Mithilfe des Message Identifiers steht dem Systemdesigner eine Möglichkeit zur Verfügung, den Payload näher zu spezifizieren, als mögliche Basis für eine differenziertere Akzeptanzfilterung.
+Das Setzen des Payload Preamble Indicators bei einer dynamischen FlexRay Botschaft bedeutet nicht, dass der Payload mit einem Network Management Vector beginnt. Stattdessen zeigt es an, dass die ersten beiden Nutzbytes den Message Identifier enthalten. Der Message Identifier ermöglicht es dem Systemdesigner, den Payload genauer zu spezifizieren und als Basis für eine differenziertere Akzeptanzfilterung zu verwenden.
 
-![1706357242957](image/1706357242957.png)
+In bestimmten Fällen kann der Sender den Payload einer Botschaft ausschließlich mit Nullen übertragen. Dies geschieht, wenn ein FlexRay Controller gemäß dem Kommunikationsplan eine statische Botschaft übertragen muss, aber der entsprechende Puffer vom Host gesperrt ist. In diesem Fall überträgt der FlexRay Controller die statische Botschaft automatisch als Nullframe, wobei der Null Frame Indicator im Header den Wert "Null" aufweist.
 
-In besonderen Fällen kann der Sender den Payload einer Botschaft ausschließlich mit Nullen übertragen. Ein solcher Fall liegt dann vor, wenn ein [FlexRay Controller](https://elearning.vector.com/mod/page/view.php?id=235 "FlexRay Controller") dem Kommunikationsplan nach eine statische Botschaft übertragen muss, aber der mit der Botschaft korrespondierende Puffer vom Host gesperrt ist. Dies kann z.B. auftreten, wenn der Host in diesem Moment selbst auf diesen Puffer zugreift. Weil der FlexRay Controller nicht auf die Daten im Puffer zugreifen kann, überträgt er die statische Botschaft automatisch als  **Nullframe** . Dabei weist der **Null Frame Indicator** im Header der Botschaft den Wert „Null“ auf.
+Das CRC-Verfahren (Cyclic Redundancy Check) wird verwendet, um den Payload zu sichern. Dabei wird auf Basis des Headers und des Payloads und unter Verwendung eines in der FlexRay Spezifikation definierten Generatorpolynoms eine CRC-Sequenz berechnet, die dem Header und dem Payload als Trailer angehängt wird. Die Checksumme, die dem Vielfachen des Headers und des Payloads entspricht, ermöglicht dem Empfänger mit hoher Sicherheit die Erkennung von Übertragungsfehlern. Ein Fehler wird erkannt, wenn die Division durch das Generatorpolynom einen Rest ergibt. Das CRC-Verfahren gewährleistet eine hohe Fehlererkennungsfähigkeit, wobei die Hamming-Distanz von der Payload-Größe abhängt.
 
-Zur Sicherung des Payloads kommt das **CRC-Verfahren** (CRC: Cyclic Redundancy Check), ein sehr leistungsstarkes Fehlererkennungsverfahren, zum Einsatz. Im Rahmen des CRC-Verfahrens wird auf der Basis des Headers und Payloads und einem, durch die FlexRay Spezifikation definierten, **Generatorpolynoms** eine **CRC-Sequenz** berechnet, die dem Header und Payload als **Trailer** angehängt wird.
+## Codierung
 
-Die Checksumme entspricht dann dem Vielfachen des Headers und des Payloads. Der Empfänger der Botschaft erkennt mit sehr hoher Sicherheit einen Übertragungsfehler. Ein Fehler wird dann festgestellt, wenn die Division durch das Generatorpolynom einen Rest ergibt. Bei einer Payload bis zu 248 Bytes garantiert das CRC-Verfahren eine  **Hamming-Distanz von sechs** , für eine größere Payload liegt die Hamming-Distanz bei vier, was zu einer geringeren Fehlererkennungsfähigkeit führt.
+Die physikalische Übertragung einer Botschaft beginnt nicht mit dem ersten Bit des Frame Headers, sondern mit der Transmission Start Sequence (TSS). Dies geschieht, um sicherzustellen, dass in einem FlexRay Cluster mit aktiver Sterntopologie die ersten Bits einer Botschaft vom aktiven Sternkoppler ordnungsgemäß vom Empfangs- zum Sendezweig transportiert werden können.
 
-### Codierung
+<img src="image/README/1712925944162.png" alt="drawing" style="max-width:35%;" />
 
-Die physikalische Übertragung einer Botschaft beginnt nicht mit dem ersten Bit des Frame Headers, sondern mit der sog.  **Transmission Start Sequence (TSS)** . Dies um zu verhindern, dass in einem FlexRay Cluster, dem eine **aktive Sterntopologie** zugrunde liegt, die ersten Bits einer Botschaft vom **aktiven Sternkoppler** nicht vom Empfangs- zu den Sendezweigen transportiert werden können.
+Die TSS muss mindestens der Zeit entsprechen, die der aktive Sternkoppler benötigt, um in den aktiven Betriebszustand zu gelangen (Star Truncation), was mindestens 3 und maximal 15 Bits Low Pegel entspricht.
 
-![1706357267376](image/1706357267376.png)
+Die TSS wird mit der Frame Start Sequence (FSS) abgeschlossen, gefolgt vom Übertrag des Frame Headers. Jedes zu übertragende Byte wird von einer Byte Start Sequence (BSS) eingeleitet, die dem Empfänger zur Nachsynchronisation dient. Das Ende einer Botschaft wird durch die Frame End Sequence (FES) markiert.
 
-Dies liegt darin begründet, dass ein aktiver Sternkoppler eine gewisse Zeit benötigt, um in den aktiven Betriebszustand zu gelangen ( **Star Truncation** ). In einem FlexRay Cluster mit einem aktiven Sternkoppler muss die TSS mindestens der Star Truncation entsprechen: mindestens 3 und maximal 15 Bits Low Pegel.
+In sowohl statischen als auch dynamischen Slots signalisieren elf rezessive Bits (Channel Idle Delimiter), dass das Kommunikationsmedium wieder frei ist. Um sicherzustellen, dass eine dynamische Botschaft genau mit dem nächstmöglichen Action Point endet, wird die Botschaftsübertragung um die Dynamic Trailing Sequence verlängert. Diese Sequenz ermöglicht es jedem Empfänger, den Minislot zu bestimmen, in dem die dynamische Botschaft endet.
 
-Abgeschlossen wird die TSS mit der sog.  **Frame Start Sequence (FSS)** . Im Anschluss an die FSS kann die Übertragung des Headers erfolgen. Dabei ist zu berücksichtigen, dass jedem zu übertragenden Byte eine sog. **Byte Start Sequence (BSS)** vorangestellt wird. Der durch diese Sequenz entstehende Flankenwechsel nutzt der Empfänger für die Nachsynchronisation. Das Ende einer Botschaft markiert die sog.  **Frame End Sequence (FES)** .
+Zur Veranschaulichung der Codierung von Botschaften stehen zwei Grafiken zur Verfügung. Die Grafik "Statische Botschaft" zeigt eine statische Botschaft unter Berücksichtigung der für die physikalische Übertragung erforderlichen Codeelemente. Die Grafik "Dynamische Botschaft" zeigt eine dynamische Botschaft ebenfalls unter Berücksichtigung dieser Codeelemente.
 
-![1706357280161](image/1706357280161.png)
-
-Sowohl im statischen auch als im dynamischen Slot zeigen elf rezessive Bits ( **Channel Idle Delimiter** ) an, dass das Kommunikationsmedium wieder frei ist. Da laut FlexRay Spezifikation eine dynamische Botschaft genau mit dem nächstmöglichen Action Point zu enden hat, wird die Botschaftsübertragung um die sog. **Dynamic Trailing Sequence** verlängert. Diese stellt sicher, dass jeder Empfänger den Minislot bestimmen kann, in dem die dynamische Botschaft endete.
-
-Zur Veranschaulichung der Codierung von Botschaften stehen Ihnen zwei Grafiken zur Verfügung. Die Grafik „Statische Botschaft“ zeigt eine statische Botschaft unter Berücksichtigung der zur physikalischen Übertragung notwendigen Codeelemente. Die Grafik „Dynamische Botschaft“ zeigt eine dynamische Botschaft ebenfalls unter Berücksichtigung der zur physikalischen Übertragung notwendigen Codeelemente.
+<img src="image/README/1712925964945.png" alt="drawing" style="max-width:35%;" />

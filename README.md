@@ -4,7 +4,7 @@ Dieses Repository enthält Informationen und Erklärungen zum FlexRay. Es bietet
 
 ## Inhaltsverzeichnis
 
-1. [🔍 Einführung](#Einfuehrung)
+1. [🔍 Einführung](01_Einführung\README.md)
    * 1.1. Elektronische Assistenten
    * 1.2. Brake-by-Wire
    * 1.3. Steer-by-Wire
@@ -14,7 +14,7 @@ Dieses Repository enthält Informationen und Erklärungen zum FlexRay. Es bietet
    * 1.7. Anfänge von FlexRay
    * 1.8. FlexRay Konsortium
    * 1.8.1. Webseite der ISO - International Organization for Standardization
-2. [📡 FlexRay Kommunikation](#flexray-kommunikation)
+2. [📡 FlexRay Kommunikation](02_Kommunikation\README.md)
    * 2.1. Kommunikationsarchitektur
    * 2.2. Passive Topologien
    * 2.3. Aktive Topologien
@@ -24,7 +24,7 @@ Dieses Repository enthält Informationen und Erklärungen zum FlexRay. Es bietet
    * 2.7. FlexRay Buspegel
    * 2.8. FlexRay Busankopplung
    * 2.9. Busguardian BG
-3. [🔓 FlexRay Buszugriff](#flexray-buszugriff)
+3. [🔓 FlexRay Buszugriff](03_Buszugriff\README.md)
    * 3.1. Prinzip des Buszugriffs
    * 3.2. Kommunikationszyklus
    * 3.3. Statisches Segment
@@ -32,11 +32,15 @@ Dieses Repository enthält Informationen und Erklärungen zum FlexRay. Es bietet
    * 3.5. Dynamisches Segment
    * 3.6. Dynamischer Slot
    * 3.7. Demonstration
-4. [🖼️ FlexRay Framing](#flexray-framing)
+4. [🖼️ FlexRay Framing](04_Framing\README.md)
    * 4.1. Frame Header
    * 4.2. Frame Payload
    * 4.3. Codierung
-5. [🔄 FlexRay Synchronisation](#flexray-synchronisation)
+5. [🔄 FlexRay Synchronisation](05_Synchronisation\README.md)
    * 5.1. Synchronisationsprinzip
    * 5.2. Phasen- und Frequenzkorrektur
    * 5.3. Synchronisationsmethode
+
+## Quelle
+
+- [Vector - FlexRay](https://elearning.vector.com/mod/page/view.php?id=224)
