@@ -58,35 +58,24 @@ Die Wahl einer bestimmten physikalischen Topologie beeinflusst ebenfalls die Feh
 
 ## Zusammensetzbarkeit
 
-<img src="image/README/1712917617460.png" alt="drawing" style="max-width:30%;" />
+Die steigende Verflechtung elektronischer Systeme und der vermehrte Einsatz elektronischer Komponenten anstelle mechanischer erhöhen die Komplexität der Kfz-Elektronik und treiben die Zeitaufwände sowie Kosten für Tests und Systemintegration immer weiter in die Höhe. Abhilfe können Architekturen schaffen, die die Eigenschaft der Zusammensetzbarkeit aufweisen.
 
+Zusammensetzbare Kommunikationsarchitekturen ermöglichen es, dass Änderungen an der Funktion eines Steuergeräts keine Auswirkungen auf andere Steuergeräte oder das Gesamtsystem haben. Das bedeutet, dass die Integration einer Systemkomponente den Test des Gesamtsystems nicht erfordert, da es ausreicht, die einzelnen Systemkomponenten zuverlässig zu prüfen.
+
+Für eine zusammensetzbare Kommunikationsarchitektur ist ein Zeitplan erforderlich, der aus einer Abfolge von aufeinanderfolgenden Zeitschlitzen besteht, die jeweils den einzelnen Busknoten zugeordnet sind. Jeder Zeitschlitz ist einer bestimmten Nachricht zugeordnet und wird durch einen klar definierten Anfangs- und Endzeitpunkt gekennzeichnet.
+
+Die Grafik "Systemintegration" zeigt beispielhaft einen Kommunikationsablaufplan mit Systemintegration. Diesem Plan liegt ein Kommunikationssystem zugrunde, das aus den Busknoten A, B und C besteht. Wie aus der Grafik ersichtlich ist, ergibt sich bei der Systemintegration genau der im Kommunikationsablaufplan definierte Kommunikationsablauf, wenn sich die Hersteller der Busknoten an den vorgegebenen Kommunikationsablaufplan halten.
+
+<img src="image/README/1712917617460.png" alt="drawing" style="max-width:30%;" />
 
 ## Motivation für FlexRay
 
-Determinismus und Fehlertoleranz
+Sicherheitskritische Fahrerassistenzfunktionen mit elektronischen Schnittstellen zum Fahrwerk stellen höchste Anforderungen an die Zuverlässigkeit, Sicherheit und Echtzeitfähigkeit des Kommunikationssystems. Ein Kommunikationssystem mit der Eigenschaft der Zusammensetzbarkeit wird benötigt, das eine buslastunabhängige, deterministische und fehlertolerante Datenkommunikation gewährleistet.
 
-**Sicherheitskritische Fahrerassistenzfunktionen** mit elektronischen Schnittstellen zum Fahrwerk stellen höchste Anforderungen an die Zuverlässigkeit, Sicherheit und Echtzeitfähigkeit des Kommunikationssystems. Benötigt wird ein Kommunikationssystem mit der Eigenschaft der [Zusammensetzbarkeit](https://elearning.vector.com/mod/page/view.php?id=228 "Zusammensetzbarkeit"), dessen Kerneigenschaft es ist, eine buslastunabhängige **deterministische und fehlertolerante Datenkommunikation** zu gewährleisten.
+Die etablierte Kommunikationstechnologie im Kfz, das Controller Area Network (CAN), kann diesen Anforderungen nicht gerecht werden, da es auf einem **ereignisorientierten** Kommunikationsansatz basiert. Das bedeutet, dass jeder Busknoten zu jedem Zeitpunkt auf das Kommunikationsmedium zugreifen kann. Die Verwendung von **Kollisionsauflösungstechniken** führt dazu, dass sich der Kommunikationsablauf erst zur Laufzeit ergibt. Ereignisgesteuerte Kommunikationssysteme ermöglichen zwar schnelle Reaktionen auf asynchrone Vorgänge, sind jedoch **nicht deterministisch**.
 
-CAN
+Das Hinzufügen und Entfernen von Busknoten beeinflusst den Kommunikationsablauf in einem ereignisgesteuerten Kommunikationssystem, was eine vollständige neue Validierung des Gesamtsystems erforderlich machen kann. Ereignisgesteuerte Kommunikationssysteme bieten keine Zusammensetzbarkeit.
 
-Diesem anspruchsvollen Anforderungsbündel kann  **CAN (Controller Area Network)** , die im Kfz etablierte  **Kommunikationstechnologie** , nicht gerecht werden, da CAN auf einem **ereignisorientierten Kommunikationsansatz** basiert. Das bedeutet, dass jeder Busknoten eines Kommunikationssystems zu jedem Zeitpunkt auf das gemeinsame Kommunikationsmedium zugreifen kann. Der Einsatz von Techniken zur Auflösung von Kollisionen führt dazu, dass sich der Kommunikationsablauf erst zur Laufzeit ergibt. Ereignisgesteuerte Kommunikationssysteme ermöglichen die schnelle Reaktion auf asynchrone Vorgänge, sind jedoch  **nicht deterministisch** .
+Aufgrund fehlender redundanter Strukturen und Mechanismen kann CAN auch den hohen Anforderungen an die Fehlertoleranz nicht gerecht werden. Zudem bietet es im Serieneinsatz nur eine maximale Datenrate von 500 KBit/s. In den 90er Jahren experimentierten einige Kfz-Hersteller mit fehlertoleranten, zeitgesteuerten Kommunikationstechniken, die höhere Datenraten ermöglichten.
 
-Weil die zeitliche Schnittstelle in einem ereignisgesteuerten Kommunikationssystem nicht definiert ist, wirkt sich das Hinzufügen und Entfernen von Busknoten auf den Kommunikationsablauf aus. Diese Auswirkungen machen streng genommen eine vollständig neue Validierung des Gesamtsystems erforderlich. Ereignisgesteuerte Kommunikationssysteme weisen **nicht** die Eigenschaft der **[Zusammensetzbarkeit](https://elearning.vector.com/mod/page/view.php?id=228 "Zusammensetzbarkeit")** auf.
-
-Weil die CAN-Kommunikationstechnologie aufgrund fehlenden redundanten Strukturen und Mechanismen auch den hohen Anforderungen an die **Fehlertoleranz** **nicht** gerecht werden kann, zudem im Serieneinsatz lediglich mit einer maximalen Datenrate von 500 KBit/s aufwarten kann, experimentierten schon so manche Kfz-Hersteller in den 90er Jahren mit fehlertoleranten, zeitgesteuerten Kommunikationstechniken, die sehr hohe Datenraten zuließen.
-
-## Anfänge von FlexRay
-
-Allerdings ergaben die Untersuchungen und Erfahrungen bei den Kfz-Herstellern, dass keine der untersuchten Kommunikationstechniken allen Anforderungen für einen Serieneinsatz für zukünftige, sicherheitskritische Systeme in Kraftfahrzeugen gerecht werden könnte. Deshalb verabredeten **BMW und DaimlerChrysler** 1999 die Spezifikation und Entwicklung einer zukünftigen, einheitlichen, zeitgesteuerten und fehlertoleranten Kommunikationstechnik gemeinsam voranzutreiben. Als Ergebnis dieser Zusammenarbeit entstand die erste grobe Anforderungsspezifikation für  **FlexRay** .
-
-## FlexRay Konsortium
-
-Gründung
-
-Ein wesentlicher Grund für den Erfolg von FlexRay war die Gründung des FlexRay Konsortiums, in dessen Rahmen sich im Jahre 2000 die beiden Kfz-Hersteller DaimlerChrysler und BMW sowie die beiden Chiphersteller Motorola und Philips zusammenschlossen.Ziel
-
-Das Ziel des Konsortiums bestand in der Schaffung eines herstellerübergreifenden, deterministischen und fehlertoleranten Kommunikationsstandards, welchen jedes Mitglied des Konsortiums ohne die Zahlung von Lizenzgebühren nutzen kann.Einsatzgebiete
-
-Als **Haupteinsatzgebiete** standen sicherheits- und zeitkritische Anwendungen im Automobil im Vordergrund. Ebenso intendierte man FlexRay aufgrund seiner Datenrate von 10 Mbit/s als Backbone im Automobil zu etablieren.Spezifikation
-
-Nachdem das FlexRay Konsortium im Jahr 2010 die Spezifikation in der Version 3.0.1 veröffentlicht hatte, wurde mit der Überführung in einen ISO-Standard begonnen. Mittlerweile ist die **ISO 17458** verfügbar. Diese beschreibt das FlexRay Protokoll, die physikalische Schicht und Conformance Tests zu deren Überprüfung. Der vollständige Standard ist über die ISO verfügbar.
+Untersuchungen und Erfahrungen zeigten jedoch, dass keine der untersuchten Kommunikationstechniken allen Anforderungen für einen Serieneinsatz in zukünftigen, sicherheitskritischen Systemen in Kraftfahrzeugen gerecht werden konnte. Daher vereinbarten BMW und DaimlerChrysler im Jahr 1999 die Spezifikation und Entwicklung einer zukünftigen, einheitlichen, zeitgesteuerten und fehlertoleranten Kommunikationstechnik. Die Zusammenarbeit führte zur ersten groben Anforderungsspezifikation für FlexRay.
