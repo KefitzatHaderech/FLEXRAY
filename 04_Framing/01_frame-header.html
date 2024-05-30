@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Frame Header - FlexRay</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01_Einfuehrung/index.html"><strong aria-hidden="true">1.</strong> Einführung</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01_Einfuehrung/01_elektronische-assistenten.html"><strong aria-hidden="true">1.1.</strong> Elektronische Assistenten</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/02_brake-by-wire.html"><strong aria-hidden="true">1.2.</strong> Brake-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/03_steer-by-wire.html"><strong aria-hidden="true">1.3.</strong> Steer-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/04_sicherheit-fehlertoleranz.html"><strong aria-hidden="true">1.4.</strong> Sicherheit und Fehlertoleranz</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/05_zusammensetzbarkeit.html"><strong aria-hidden="true">1.5.</strong> Zusammensetzbarkeit</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/06_motivation-flexray.html"><strong aria-hidden="true">1.6.</strong> Motivation für FlexRay</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/07_konsortium.html"><strong aria-hidden="true">1.7.</strong> FlexRay Konsortium</a></li></ol></li><li class="chapter-item expanded "><a href="../02_Kommunikation/index.html"><strong aria-hidden="true">2.</strong> Kommunikation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../02_Kommunikation/01_kommunikationsarchitektur.html"><strong aria-hidden="true">2.1.</strong> Kommunikationsarchitektur</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/02_passive-topologien.html"><strong aria-hidden="true">2.2.</strong> Passive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/03_aktive-topologien.html"><strong aria-hidden="true">2.3.</strong> Aktive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/04_flexray-knoten.html"><strong aria-hidden="true">2.4.</strong> FlexRay Knoten</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/05_flexray-controller.html"><strong aria-hidden="true">2.5.</strong> FlexRay Controller</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/06_flexray-bus.html"><strong aria-hidden="true">2.6.</strong> FlexRay Bus</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/07_flexray-buspegel.html"><strong aria-hidden="true">2.7.</strong> FlexRay Buspegel</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/08_flexray-busankopplung.html"><strong aria-hidden="true">2.8.</strong> FlexRay Busankopplung</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/09_busguardian.html"><strong aria-hidden="true">2.9.</strong> Busguardian</a></li></ol></li><li class="chapter-item expanded "><a href="../03_Buszugriff/index.html"><strong aria-hidden="true">3.</strong> Buszugriff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03_Buszugriff/01_prinzip-buszugriff.html"><strong aria-hidden="true">3.1.</strong> Prinzip des Buszugriffs</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/02_kommunikationszyklus.html"><strong aria-hidden="true">3.2.</strong> Kommunikationszyklus</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/03_statisches-segment.html"><strong aria-hidden="true">3.3.</strong> Statisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/04_statischer-slot.html"><strong aria-hidden="true">3.4.</strong> Statischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/05_dynamisches-segment.html"><strong aria-hidden="true">3.5.</strong> Dynamisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/06_dynamischer-slot.html"><strong aria-hidden="true">3.6.</strong> Dynamischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/07_demonstration.html"><strong aria-hidden="true">3.7.</strong> Demonstration</a></li></ol></li><li class="chapter-item expanded "><a href="../04_Framing/index.html"><strong aria-hidden="true">4.</strong> Framing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04_Framing/01_frame-header.html" class="active"><strong aria-hidden="true">4.1.</strong> Frame Header</a></li><li class="chapter-item expanded "><a href="../04_Framing/02_frame-payload.html"><strong aria-hidden="true">4.2.</strong> Frame Payload</a></li><li class="chapter-item expanded "><a href="../04_Framing/03_codierung.html"><strong aria-hidden="true">4.3.</strong> Codierung</a></li></ol></li><li class="chapter-item expanded "><a href="../05_Synchronisation/index.html"><strong aria-hidden="true">5.</strong> Synchronisation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05_Synchronisation/01_synchronisationsprinzip.html"><strong aria-hidden="true">5.1.</strong> Synchronisationsprinzip</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/02_phasen-frequenzkorrektur.html"><strong aria-hidden="true">5.2.</strong> Phasen- und Frequenzkorrektur</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/03_synchronisationsmethode.html"><strong aria-hidden="true">5.3.</strong> Synchronisationsmethode</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FlexRay</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="flexray-ein-umfassendes-tutorial-für-fahrzeugelektrik-und--elektronik"><a class="header" href="#flexray-ein-umfassendes-tutorial-für-fahrzeugelektrik-und--elektronik">FlexRay: Ein umfassendes Tutorial für Fahrzeugelektrik und -elektronik</a></h3>
+<p>FlexRay ist ein leistungsstarkes Kommunikationsprotokoll, das speziell für den Einsatz in modernen Fahrzeugen entwickelt wurde. Es ermöglicht die zuverlässige und deterministische Übertragung von Daten zwischen verschiedenen elektronischen Steuergeräten (ECUs) im Fahrzeug. Dieses Tutorial bietet eine detaillierte Erklärung der FlexRay-Datenübertragung, insbesondere des Botschaftsrahmens.</p>
+<h4 id="struktur-einer-flexray-botschaft"><a class="header" href="#struktur-einer-flexray-botschaft">Struktur einer FlexRay-Botschaft</a></h4>
+<p>Eine FlexRay-Botschaft besteht aus drei Hauptkomponenten:</p>
+<ol>
+<li><strong>Header</strong></li>
+<li><strong>Payload</strong></li>
+<li><strong>Trailer</strong></li>
+</ol>
+<h5 id="1-header"><a class="header" href="#1-header">1. Header</a></h5>
+<p>Der Header einer FlexRay-Botschaft ist 40 Bits lang und besteht aus mehreren wichtigen Feldern:</p>
+<ul>
+<li>
+<p><strong>Identifier (ID)</strong></p>
+<ul>
+<li>Länge: 11 Bits</li>
+<li>Funktion: Der Identifier kennzeichnet eine spezifische Botschaft und korrespondiert mit einem Slot im FlexRay-Cluster. Eine Ausnahme bildet die ID=0x00, die ungültige Botschaften kennzeichnet.</li>
+</ul>
+</li>
+<li>
+<p><strong>Indikatorbits</strong></p>
+<ul>
+<li>Anzahl: 4 Bits</li>
+<li>Funktion: Diese Bits spezifizieren näher die Art der Botschaft. Zu den Indikatorbits gehören:
+<ul>
+<li><strong>Payload Preamble Indicator</strong>: Zeigt an, ob im Payload einer statischen Botschaft ein Network Management Vector oder in einer dynamischen Botschaft ein Message Identifier übertragen wird.</li>
+<li><strong>Null Frame Indicator</strong>: Kennzeichnet, ob der Payload ausschließlich aus Nullen besteht (ungültiger Payload).</li>
+<li><strong>Sync Frame Indicator</strong>: Gibt an, ob die Botschaft als Synchronisationsrahmen verwendet wird.</li>
+<li><strong>Startup Frame Indicator</strong>: Gibt an, ob die Botschaft als Startrahmen verwendet wird.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Reserviertes Bit</strong></p>
+<ul>
+<li>Anzahl: 1 Bit</li>
+<li>Funktion: Dieses Bit ist für zukünftige Erweiterungen reserviert und hat aktuell keine definierte Funktion.</li>
+</ul>
+</li>
+<li>
+<p><strong>Payload Length</strong></p>
+<ul>
+<li>Länge: 7 Bits</li>
+<li>Funktion: Zeigt die Größe des Payloads in Words (1 Word = 2 Bytes) an. Damit können maximal 254 Bytes Nutzdaten übertragen werden.</li>
+</ul>
+</li>
+<li>
+<p><strong>Header CRC Sequence</strong></p>
+<ul>
+<li>Länge: 11 Bits</li>
+<li>Funktion: Eine Prüfsumme, die zur Fehlererkennung dient. Sie wird basierend auf dem Identifier, der Payload Length, den Indikatorbits und einem spezifizierten Generatorpolynom berechnet.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cycle Counter</strong></p>
+<ul>
+<li>Länge: 6 Bits</li>
+<li>Funktion: Repräsentiert die Nummer des Zyklus, in dem die Botschaft gesendet wird. Der Cycle Counter zählt von 0 bis 63 und wiederholt sich dann.</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-payload"><a class="header" href="#2-payload">2. Payload</a></h5>
+<p>Der Payload-Bereich einer FlexRay-Botschaft enthält die eigentlichen Nutzdaten. Die maximale Länge des Payloads beträgt 254 Bytes, wie durch die Payload Length im Header spezifiziert. Die Datenstruktur im Payload kann je nach Anwendung variieren, aber sie ist in der Regel in statische und dynamische Segmente unterteilt:</p>
+<ul>
+<li><strong>Statische Segmente</strong>: Diese sind fest zugewiesene Zeitfenster, die deterministische Kommunikationsmuster gewährleisten.</li>
+<li><strong>Dynamische Segmente</strong>: Diese Segmente erlauben eine flexiblere Datenübertragung und können für unterschiedliche Prioritäten und Nutzlasten verwendet werden.</li>
+</ul>
+<h5 id="3-trailer"><a class="header" href="#3-trailer">3. Trailer</a></h5>
+<p>Der Trailer einer FlexRay-Botschaft enthält abschließende Informationen, die zur Sicherstellung der Integrität und Vollständigkeit der Botschaft beitragen. Dazu gehört in der Regel eine CRC-Prüfsumme, die über den gesamten Botschaftsinhalt berechnet wird.</p>
+<h4 id="fehlerkorrektur-und-synchronisation"><a class="header" href="#fehlerkorrektur-und-synchronisation">Fehlerkorrektur und Synchronisation</a></h4>
+<p>Die FlexRay-Kommunikation ist so konzipiert, dass sie extrem robust gegenüber Fehlern und Synchronisationsproblemen ist. Die Header CRC Sequence und die CRC-Prüfsumme im Trailer stellen sicher, dass Fehler bei der Übertragung erkannt werden. Zusätzlich sorgen der Sync Frame Indicator und der Startup Frame Indicator dafür, dass die Botschaften korrekt synchronisiert und initialisiert werden.</p>
+<h4 id="kritische-analyse-und-genauigkeit"><a class="header" href="#kritische-analyse-und-genauigkeit">Kritische Analyse und Genauigkeit</a></h4>
+<p>Während der bereitgestellte Text die wesentlichen Aspekte der FlexRay-Botschaft gut beschreibt, gibt es einige Punkte, die weiter präzisiert oder klargestellt werden sollten:</p>
+<ul>
+<li><strong>Nutzung der IDs</strong>: Nicht alle IDs sind frei nutzbar. In einem realen FlexRay-Netzwerk gibt es oft Einschränkungen und Reservierungen für spezielle IDs, um Kollisionen und Interferenzen zu vermeiden.</li>
+<li><strong>CRC-Berechnung</strong>: Die genaue Methode und das verwendete Polynom für die CRC-Berechnung sind standardisiert und in der FlexRay-Spezifikation detailliert beschrieben. Eine genaue Implementierung erfordert das Verständnis dieser Spezifikationen.</li>
+<li><strong>Reserviertes Bit</strong>: Die Funktion des reservierten Bits sollte klar definiert sein, auch wenn es aktuell nicht genutzt wird. Es ist wichtig, sich an die Spezifikation zu halten, um zukünftige Kompatibilitätsprobleme zu vermeiden.</li>
+</ul>
+<h4 id="fazit"><a class="header" href="#fazit">Fazit</a></h4>
+<p>FlexRay ist ein fortschrittliches Kommunikationsprotokoll, das speziell für die Anforderungen moderner Fahrzeugnetze entwickelt wurde. Durch seine deterministischen Übertragungseigenschaften und robusten Fehlerkorrekturmechanismen bietet es eine zuverlässige Plattform für sicherheitskritische Anwendungen. Das Verständnis der Struktur und Funktion der FlexRay-Botschaften ist entscheidend für die erfolgreiche Implementierung und Wartung von FlexRay-Netzwerken in Fahrzeugen.</p>
+<p>Dieses Tutorial soll als Grundlage dienen, um tiefer in die FlexRay-Technologie einzutauchen und weiterführende Aspekte wie das Zeittrigger-Mechanismus und die Cluster-Konfiguration zu erforschen.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../04_Framing/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../04_Framing/02_frame-payload.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../04_Framing/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../04_Framing/02_frame-payload.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Aktive Topologien - FlexRay</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01_Einfuehrung/index.html"><strong aria-hidden="true">1.</strong> Einführung</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01_Einfuehrung/01_elektronische-assistenten.html"><strong aria-hidden="true">1.1.</strong> Elektronische Assistenten</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/02_brake-by-wire.html"><strong aria-hidden="true">1.2.</strong> Brake-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/03_steer-by-wire.html"><strong aria-hidden="true">1.3.</strong> Steer-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/04_sicherheit-fehlertoleranz.html"><strong aria-hidden="true">1.4.</strong> Sicherheit und Fehlertoleranz</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/05_zusammensetzbarkeit.html"><strong aria-hidden="true">1.5.</strong> Zusammensetzbarkeit</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/06_motivation-flexray.html"><strong aria-hidden="true">1.6.</strong> Motivation für FlexRay</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/07_konsortium.html"><strong aria-hidden="true">1.7.</strong> FlexRay Konsortium</a></li></ol></li><li class="chapter-item expanded "><a href="../02_Kommunikation/index.html"><strong aria-hidden="true">2.</strong> Kommunikation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../02_Kommunikation/01_kommunikationsarchitektur.html"><strong aria-hidden="true">2.1.</strong> Kommunikationsarchitektur</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/02_passive-topologien.html"><strong aria-hidden="true">2.2.</strong> Passive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/03_aktive-topologien.html" class="active"><strong aria-hidden="true">2.3.</strong> Aktive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/04_flexray-knoten.html"><strong aria-hidden="true">2.4.</strong> FlexRay Knoten</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/05_flexray-controller.html"><strong aria-hidden="true">2.5.</strong> FlexRay Controller</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/06_flexray-bus.html"><strong aria-hidden="true">2.6.</strong> FlexRay Bus</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/07_flexray-buspegel.html"><strong aria-hidden="true">2.7.</strong> FlexRay Buspegel</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/08_flexray-busankopplung.html"><strong aria-hidden="true">2.8.</strong> FlexRay Busankopplung</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/09_busguardian.html"><strong aria-hidden="true">2.9.</strong> Busguardian</a></li></ol></li><li class="chapter-item expanded "><a href="../03_Buszugriff/index.html"><strong aria-hidden="true">3.</strong> Buszugriff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03_Buszugriff/01_prinzip-buszugriff.html"><strong aria-hidden="true">3.1.</strong> Prinzip des Buszugriffs</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/02_kommunikationszyklus.html"><strong aria-hidden="true">3.2.</strong> Kommunikationszyklus</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/03_statisches-segment.html"><strong aria-hidden="true">3.3.</strong> Statisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/04_statischer-slot.html"><strong aria-hidden="true">3.4.</strong> Statischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/05_dynamisches-segment.html"><strong aria-hidden="true">3.5.</strong> Dynamisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/06_dynamischer-slot.html"><strong aria-hidden="true">3.6.</strong> Dynamischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/07_demonstration.html"><strong aria-hidden="true">3.7.</strong> Demonstration</a></li></ol></li><li class="chapter-item expanded "><a href="../04_Framing/index.html"><strong aria-hidden="true">4.</strong> Framing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04_Framing/01_frame-header.html"><strong aria-hidden="true">4.1.</strong> Frame Header</a></li><li class="chapter-item expanded "><a href="../04_Framing/02_frame-payload.html"><strong aria-hidden="true">4.2.</strong> Frame Payload</a></li><li class="chapter-item expanded "><a href="../04_Framing/03_codierung.html"><strong aria-hidden="true">4.3.</strong> Codierung</a></li></ol></li><li class="chapter-item expanded "><a href="../05_Synchronisation/index.html"><strong aria-hidden="true">5.</strong> Synchronisation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05_Synchronisation/01_synchronisationsprinzip.html"><strong aria-hidden="true">5.1.</strong> Synchronisationsprinzip</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/02_phasen-frequenzkorrektur.html"><strong aria-hidden="true">5.2.</strong> Phasen- und Frequenzkorrektur</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/03_synchronisationsmethode.html"><strong aria-hidden="true">5.3.</strong> Synchronisationsmethode</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FlexRay</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="aktive-topologien"><a class="header" href="#aktive-topologien">Aktive Topologien</a></h1>
+<h2 id="grundkonzepte-von-flexray"><a class="header" href="#grundkonzepte-von-flexray">Grundkonzepte von FlexRay</a></h2>
+<p>FlexRay basiert auf einer zeitgesteuerten (TDMA) und eventgesteuerten (FEC) Kommunikation. Das Protokoll erlaubt es, dass Nachrichten in festgelegten Zeitfenstern übertragen werden, was eine deterministische Kommunikation ermöglicht. FlexRay-Netzwerke bestehen aus mehreren Knoten (Steuergeräten), die durch Kommunikationskanäle verbunden sind. Diese Knoten kommunizieren über einen Bus, der entweder als Single-Channel oder Dual-Channel ausgeführt sein kann.</p>
+<h2 id="topologien-in-flexray-netzwerken"><a class="header" href="#topologien-in-flexray-netzwerken">Topologien in FlexRay-Netzwerken</a></h2>
+<h3 id="passive-sterntopologie"><a class="header" href="#passive-sterntopologie">Passive Sterntopologie</a></h3>
+<p>In einer passiven Sterntopologie sind die FlexRay-Knoten über einen passiven Sternmittelpunkt verbunden. Diese Anordnung hat jedoch Einschränkungen hinsichtlich der Signalstärke und der Störanfälligkeit. Die passive Sterntopologie ist einfach, bietet jedoch keine Möglichkeit, fehlerhafte Kommunikationszweige zu isolieren.</p>
+<h3 id="aktive-sterntopologie"><a class="header" href="#aktive-sterntopologie">Aktive Sterntopologie</a></h3>
+<p>Im Gegensatz zur passiven Sterntopologie bietet die aktive Sterntopologie eine wesentlich höhere Zuverlässigkeit und Fehlertoleranz. Bei dieser Topologie werden die FlexRay-Knoten physikalisch in Form eines Sterns angeordnet, wobei der zentrale Knoten durch einen aktiven Sternkoppler ersetzt wird.</p>
+<h4 id="funktionsweise-des-aktiven-sternkopplers"><a class="header" href="#funktionsweise-des-aktiven-sternkopplers">Funktionsweise des aktiven Sternkopplers</a></h4>
+<p>Ein aktiver Sternkoppler empfängt Signale von einem Kommunikationszweig, verstärkt sie und verteilt sie an alle anderen Kommunikationszweige. Dadurch wird die Signalstärke verbessert und die Reichweite des Netzwerks erhöht. Der maximale Abstand zwischen einem aktiven Sternkoppler und einem FlexRay-Knoten darf 24 Meter nicht überschreiten.</p>
+<h4 id="vorteile-der-aktiven-sterntopologie"><a class="header" href="#vorteile-der-aktiven-sterntopologie">Vorteile der aktiven Sterntopologie</a></h4>
+<ol>
+<li><strong>Fehlerisolierung</strong>: Der aktive Sternkoppler kann fehlerhafte Kommunikationszweige erkennen und isolieren, wodurch die Ausbreitung von Fehlern verhindert wird.</li>
+<li><strong>Erweiterte Netzwerkreichweite</strong>: Durch den Einsatz aktiver Sternkoppler kann die Ausdehnung eines FlexRay-Clusters vergrößert werden.</li>
+<li><strong>Elektrische Stabilität</strong>: Die aktiven Komponenten sorgen für eine ideale Busabschließung und verbessern die elektrische Stabilität des Netzwerks.</li>
+</ol>
+<h3 id="dimensionierung-einer-aktiven-clustertopologie"><a class="header" href="#dimensionierung-einer-aktiven-clustertopologie">Dimensionierung einer aktiven Clustertopologie</a></h3>
+<p>Bei der Planung und Dimensionierung einer aktiven Clustertopologie müssen einige wichtige Faktoren berücksichtigt werden:</p>
+<ol>
+<li><strong>Signalverzögerung</strong>: Der aktive Sternkoppler verursacht eine Verzögerung in der Signalübertragung. Diese Verzögerung, bekannt als "Star Truncation", darf laut FlexRay-Spezifikation 450 Nanosekunden nicht überschreiten.</li>
+<li><strong>Transmission Start Sequence (TSS)</strong>: Jede FlexRay-Botschaft muss mit einer TSS beginnen, um die Signalverzögerung des aktiven Sternkopplers zu kompensieren.</li>
+<li><strong>Erweiterung durch Hintereinanderschaltung</strong>: Durch das Hintereinanderschalten von zwei aktiven Sternkopplern kann die Netzwerkausdehnung um zusätzliche 24 Meter erweitert werden. Praktisch sollte jedoch eher von einer maximalen Ausdehnung von 3x12 Metern ausgegangen werden, um die Signalintegrität zu gewährleisten.</li>
+</ol>
+<h2 id="mischtopologien"><a class="header" href="#mischtopologien">Mischtopologien</a></h2>
+<p>In einigen Anwendungen werden Mischtopologien verwendet, die sowohl aktive als auch passive Komponenten kombinieren. Diese Topologien ermöglichen flexible Designs und können in komplexen Netzwerken vorteilhaft sein, wo unterschiedliche Anforderungen an Reichweite und Fehlertoleranz bestehen.</p>
+<h2 id="kritische-bewertung-und-mögliche-ungenauigkeiten"><a class="header" href="#kritische-bewertung-und-mögliche-ungenauigkeiten">Kritische Bewertung und mögliche Ungenauigkeiten</a></h2>
+<p>Während die aktive Sterntopologie viele Vorteile bietet, gibt es auch Einschränkungen und potenzielle Probleme:</p>
+<ol>
+<li><strong>Komplexität und Kosten</strong>: Der Einsatz von aktiven Sternkopplern erhöht die Komplexität und die Kosten des Netzwerks.</li>
+<li><strong>Verzögerungen</strong>: Die durch den aktiven Sternkoppler verursachten Verzögerungen müssen sorgfältig berücksichtigt werden, um die Performance des Netzwerks nicht negativ zu beeinflussen.</li>
+<li><strong>Reichweitenbeschränkungen</strong>: Trotz der theoretisch möglichen Erweiterung der Reichweite durch Hintereinanderschaltung aktiver Sternkoppler, kann die praktische Umsetzung aufgrund der Signalintegrität eingeschränkt sein.</li>
+</ol>
+<h2 id="fazit"><a class="header" href="#fazit">Fazit</a></h2>
+<p>FlexRay ist ein leistungsfähiges und robustes Kommunikationsprotokoll für die Fahrzeugelektronik. Die aktive Sterntopologie stellt eine erhebliche Verbesserung gegenüber der passiven Sterntopologie dar, insbesondere in Bezug auf Fehlertoleranz und elektrische Stabilität. Bei der Planung und Implementierung von FlexRay-Netzwerken müssen jedoch die spezifischen Anforderungen und Einschränkungen sorgfältig berücksichtigt werden, um eine optimale Performance und Zuverlässigkeit zu gewährleisten.</p>
+<p>Durch das Verständnis und die richtige Anwendung dieser Konzepte können Ingenieure leistungsfähige und zuverlässige FlexRay-Netzwerke in modernen Fahrzeugen realisieren.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../02_Kommunikation/02_passive-topologien.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../02_Kommunikation/04_flexray-knoten.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../02_Kommunikation/02_passive-topologien.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../02_Kommunikation/04_flexray-knoten.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

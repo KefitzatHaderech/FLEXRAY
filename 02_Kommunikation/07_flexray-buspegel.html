@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FlexRay Buspegel - FlexRay</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01_Einfuehrung/index.html"><strong aria-hidden="true">1.</strong> Einführung</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01_Einfuehrung/01_elektronische-assistenten.html"><strong aria-hidden="true">1.1.</strong> Elektronische Assistenten</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/02_brake-by-wire.html"><strong aria-hidden="true">1.2.</strong> Brake-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/03_steer-by-wire.html"><strong aria-hidden="true">1.3.</strong> Steer-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/04_sicherheit-fehlertoleranz.html"><strong aria-hidden="true">1.4.</strong> Sicherheit und Fehlertoleranz</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/05_zusammensetzbarkeit.html"><strong aria-hidden="true">1.5.</strong> Zusammensetzbarkeit</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/06_motivation-flexray.html"><strong aria-hidden="true">1.6.</strong> Motivation für FlexRay</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/07_konsortium.html"><strong aria-hidden="true">1.7.</strong> FlexRay Konsortium</a></li></ol></li><li class="chapter-item expanded "><a href="../02_Kommunikation/index.html"><strong aria-hidden="true">2.</strong> Kommunikation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../02_Kommunikation/01_kommunikationsarchitektur.html"><strong aria-hidden="true">2.1.</strong> Kommunikationsarchitektur</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/02_passive-topologien.html"><strong aria-hidden="true">2.2.</strong> Passive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/03_aktive-topologien.html"><strong aria-hidden="true">2.3.</strong> Aktive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/04_flexray-knoten.html"><strong aria-hidden="true">2.4.</strong> FlexRay Knoten</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/05_flexray-controller.html"><strong aria-hidden="true">2.5.</strong> FlexRay Controller</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/06_flexray-bus.html"><strong aria-hidden="true">2.6.</strong> FlexRay Bus</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/07_flexray-buspegel.html" class="active"><strong aria-hidden="true">2.7.</strong> FlexRay Buspegel</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/08_flexray-busankopplung.html"><strong aria-hidden="true">2.8.</strong> FlexRay Busankopplung</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/09_busguardian.html"><strong aria-hidden="true">2.9.</strong> Busguardian</a></li></ol></li><li class="chapter-item expanded "><a href="../03_Buszugriff/index.html"><strong aria-hidden="true">3.</strong> Buszugriff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03_Buszugriff/01_prinzip-buszugriff.html"><strong aria-hidden="true">3.1.</strong> Prinzip des Buszugriffs</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/02_kommunikationszyklus.html"><strong aria-hidden="true">3.2.</strong> Kommunikationszyklus</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/03_statisches-segment.html"><strong aria-hidden="true">3.3.</strong> Statisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/04_statischer-slot.html"><strong aria-hidden="true">3.4.</strong> Statischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/05_dynamisches-segment.html"><strong aria-hidden="true">3.5.</strong> Dynamisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/06_dynamischer-slot.html"><strong aria-hidden="true">3.6.</strong> Dynamischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/07_demonstration.html"><strong aria-hidden="true">3.7.</strong> Demonstration</a></li></ol></li><li class="chapter-item expanded "><a href="../04_Framing/index.html"><strong aria-hidden="true">4.</strong> Framing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04_Framing/01_frame-header.html"><strong aria-hidden="true">4.1.</strong> Frame Header</a></li><li class="chapter-item expanded "><a href="../04_Framing/02_frame-payload.html"><strong aria-hidden="true">4.2.</strong> Frame Payload</a></li><li class="chapter-item expanded "><a href="../04_Framing/03_codierung.html"><strong aria-hidden="true">4.3.</strong> Codierung</a></li></ol></li><li class="chapter-item expanded "><a href="../05_Synchronisation/index.html"><strong aria-hidden="true">5.</strong> Synchronisation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05_Synchronisation/01_synchronisationsprinzip.html"><strong aria-hidden="true">5.1.</strong> Synchronisationsprinzip</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/02_phasen-frequenzkorrektur.html"><strong aria-hidden="true">5.2.</strong> Phasen- und Frequenzkorrektur</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/03_synchronisationsmethode.html"><strong aria-hidden="true">5.3.</strong> Synchronisationsmethode</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FlexRay</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="flexray-buspegel"><a class="header" href="#flexray-buspegel">FlexRay Buspegel</a></h1>
+<h2 id="physikalische-signalübertragung"><a class="header" href="#physikalische-signalübertragung">Physikalische Signalübertragung</a></h2>
+<p>Die physikalische Signalübertragung in einem FlexRay-Cluster basiert auf der Differenzsignalübertragung. Dies bedeutet, dass die Informationen durch Spannungsdifferenzen zwischen zwei Leitungen, „Bus Plus“ (BP) und „Bus Minus“ (BM), übertragen werden. Diese beiden Leitungen bilden zusammen das Übertragungsmedium, den FlexRay-Bus.</p>
+<h3 id="buspegel-und-buszustände"><a class="header" href="#buspegel-und-buszustände">Buspegel und Buszustände</a></h3>
+<p>Die Electrical Physical Layer Specification des FlexRay-Protokolls definiert vier Buspegel, die in zwei Zustände unterteilt sind: rezessiv und dominant.</p>
+<h4 id="rezessiver-buszustand"><a class="header" href="#rezessiver-buszustand">Rezessiver Buszustand</a></h4>
+<p>Der rezessive Buszustand ist durch eine Differenzspannung von 0 Volt gekennzeichnet. Dieser Zustand tritt in zwei Varianten auf:</p>
+<ol>
+<li><strong>Idle</strong>: Beide Leitungen, BP und BM, haben ein Potenzial von 2,5 Volt, was zu einer Differenzspannung von 0 Volt führt. Der gültige Spannungsbereich für den Idle-Buspegel liegt zwischen 1,8 Volt und 3,2 Volt.</li>
+<li><strong>Idle Low Power</strong>: Dieser Zustand tritt ein, wenn sich alle FlexRay-Transceiver im Low Power Mode befinden. Beide Leitungen haben ein Potenzial von 0 Volt, wodurch ebenfalls eine Differenzspannung von 0 Volt entsteht. Der gültige Spannungsbereich für den Idle Low Power Buspegel liegt zwischen -0,2 Volt und 0,2 Volt.</li>
+</ol>
+<h4 id="dominanter-buszustand"><a class="header" href="#dominanter-buszustand">Dominanter Buszustand</a></h4>
+<p>Der dominante Buszustand ist durch eine Differenzspannung von ungleich 0 Volt gekennzeichnet und kann in zwei Buspegel unterteilt werden:</p>
+<ol>
+<li><strong>Data_1</strong>: Die Busleitung BP hat ein Potenzial von 3,5 Volt und die Busleitung BM ein Potenzial von 1,5 Volt. Die resultierende Differenzspannung beträgt 2 Volt. Der Buspegel „Data_1“ repräsentiert die logische Eins.</li>
+<li><strong>Data_0</strong>: Die Busleitung BP hat ein Potenzial von 1,5 Volt und die Busleitung BM ein Potenzial von 3,5 Volt. Die Differenzspannung beträgt -2 Volt. Der Buspegel „Data_0“ repräsentiert die logische Null.</li>
+</ol>
+<h2 id="signalinterpretation-und-schwellenwerte"><a class="header" href="#signalinterpretation-und-schwellenwerte">Signalinterpretation und Schwellenwerte</a></h2>
+<p>Die FlexRay-Kommunikation basiert auf der präzisen Interpretation der Spannungsdifferenzen zwischen BP und BM. Sender und Empfänger müssen die definierten Spannungspegel und deren Schwellenwerte korrekt interpretieren, um die Daten zuverlässig zu übertragen und zu empfangen.</p>
+<h3 id="sende--und-empfangsschwellen"><a class="header" href="#sende--und-empfangsschwellen">Sende- und Empfangsschwellen</a></h3>
+<p>Die Spezifikation gibt genaue Schwellenwerte vor, die Sender und Empfänger einhalten müssen, um die Buspegel korrekt zu erkennen und zu verarbeiten. Diese Schwellenwerte sind entscheidend, um Signalstörungen zu minimieren und eine fehlerfreie Datenübertragung zu gewährleisten.</p>
+<h2 id="zusammenfassung-und-kritische-anmerkungen"><a class="header" href="#zusammenfassung-und-kritische-anmerkungen">Zusammenfassung und kritische Anmerkungen</a></h2>
+<p>Die physikalische Signalübertragung in einem FlexRay-Cluster ist ein komplexer Prozess, der auf der präzisen Steuerung und Interpretation von Differenzspannungen basiert. Ein fundiertes Verständnis der Buspegel und Zustände sowie der entsprechenden Schwellenwerte ist essenziell für die Entwicklung und den Betrieb zuverlässiger FlexRay-Netzwerke in Fahrzeugen.</p>
+<h3 id="kritische-bewertung"><a class="header" href="#kritische-bewertung">Kritische Bewertung</a></h3>
+<p>Es ist wichtig, darauf hinzuweisen, dass jede Ungenauigkeit in der Spannungserkennung oder Signalinterpretation zu Kommunikationsfehlern führen kann. Daher sind strenge Tests und Validierungen unerlässlich, um die Integrität des FlexRay-Systems sicherzustellen. Zudem muss bei der Implementierung und Wartung der FlexRay-Systeme sorgfältig darauf geachtet werden, dass alle Komponenten den Spezifikationen entsprechen und korrekt kalibriert sind.</p>
+<p>Durch die Anwendung dieser Prinzipien können Ingenieure und Techniker robuste und effiziente FlexRay-Netzwerke entwickeln, die den hohen Anforderungen moderner Fahrzeugelektronik gerecht werden.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../02_Kommunikation/06_flexray-bus.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../02_Kommunikation/08_flexray-busankopplung.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../02_Kommunikation/06_flexray-bus.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../02_Kommunikation/08_flexray-busankopplung.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

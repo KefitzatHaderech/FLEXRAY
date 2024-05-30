@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Codierung - FlexRay</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01_Einfuehrung/index.html"><strong aria-hidden="true">1.</strong> Einführung</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01_Einfuehrung/01_elektronische-assistenten.html"><strong aria-hidden="true">1.1.</strong> Elektronische Assistenten</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/02_brake-by-wire.html"><strong aria-hidden="true">1.2.</strong> Brake-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/03_steer-by-wire.html"><strong aria-hidden="true">1.3.</strong> Steer-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/04_sicherheit-fehlertoleranz.html"><strong aria-hidden="true">1.4.</strong> Sicherheit und Fehlertoleranz</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/05_zusammensetzbarkeit.html"><strong aria-hidden="true">1.5.</strong> Zusammensetzbarkeit</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/06_motivation-flexray.html"><strong aria-hidden="true">1.6.</strong> Motivation für FlexRay</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/07_konsortium.html"><strong aria-hidden="true">1.7.</strong> FlexRay Konsortium</a></li></ol></li><li class="chapter-item expanded "><a href="../02_Kommunikation/index.html"><strong aria-hidden="true">2.</strong> Kommunikation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../02_Kommunikation/01_kommunikationsarchitektur.html"><strong aria-hidden="true">2.1.</strong> Kommunikationsarchitektur</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/02_passive-topologien.html"><strong aria-hidden="true">2.2.</strong> Passive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/03_aktive-topologien.html"><strong aria-hidden="true">2.3.</strong> Aktive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/04_flexray-knoten.html"><strong aria-hidden="true">2.4.</strong> FlexRay Knoten</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/05_flexray-controller.html"><strong aria-hidden="true">2.5.</strong> FlexRay Controller</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/06_flexray-bus.html"><strong aria-hidden="true">2.6.</strong> FlexRay Bus</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/07_flexray-buspegel.html"><strong aria-hidden="true">2.7.</strong> FlexRay Buspegel</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/08_flexray-busankopplung.html"><strong aria-hidden="true">2.8.</strong> FlexRay Busankopplung</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/09_busguardian.html"><strong aria-hidden="true">2.9.</strong> Busguardian</a></li></ol></li><li class="chapter-item expanded "><a href="../03_Buszugriff/index.html"><strong aria-hidden="true">3.</strong> Buszugriff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03_Buszugriff/01_prinzip-buszugriff.html"><strong aria-hidden="true">3.1.</strong> Prinzip des Buszugriffs</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/02_kommunikationszyklus.html"><strong aria-hidden="true">3.2.</strong> Kommunikationszyklus</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/03_statisches-segment.html"><strong aria-hidden="true">3.3.</strong> Statisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/04_statischer-slot.html"><strong aria-hidden="true">3.4.</strong> Statischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/05_dynamisches-segment.html"><strong aria-hidden="true">3.5.</strong> Dynamisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/06_dynamischer-slot.html"><strong aria-hidden="true">3.6.</strong> Dynamischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/07_demonstration.html"><strong aria-hidden="true">3.7.</strong> Demonstration</a></li></ol></li><li class="chapter-item expanded "><a href="../04_Framing/index.html"><strong aria-hidden="true">4.</strong> Framing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04_Framing/01_frame-header.html"><strong aria-hidden="true">4.1.</strong> Frame Header</a></li><li class="chapter-item expanded "><a href="../04_Framing/02_frame-payload.html"><strong aria-hidden="true">4.2.</strong> Frame Payload</a></li><li class="chapter-item expanded "><a href="../04_Framing/03_codierung.html" class="active"><strong aria-hidden="true">4.3.</strong> Codierung</a></li></ol></li><li class="chapter-item expanded "><a href="../05_Synchronisation/index.html"><strong aria-hidden="true">5.</strong> Synchronisation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05_Synchronisation/01_synchronisationsprinzip.html"><strong aria-hidden="true">5.1.</strong> Synchronisationsprinzip</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/02_phasen-frequenzkorrektur.html"><strong aria-hidden="true">5.2.</strong> Phasen- und Frequenzkorrektur</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/03_synchronisationsmethode.html"><strong aria-hidden="true">5.3.</strong> Synchronisationsmethode</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FlexRay</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="flexray-tutorial-physikalische-Übertragung-und-codierung-von-nachrichten"><a class="header" href="#flexray-tutorial-physikalische-Übertragung-und-codierung-von-nachrichten">FlexRay-Tutorial: Physikalische Übertragung und Codierung von Nachrichten</a></h1>
+<p>In diesem umfassenden Tutorial werden wir die physikalische Übertragung und Codierung von Nachrichten im FlexRay-Netzwerk detailliert untersuchen. Wir werden die verschiedenen Sequenzen, die zur Übertragung einer Nachricht gehören, sowie die spezifischen Anforderungen und Mechanismen für statische und dynamische Botschaften behandeln. Dabei werden wir kritisch auf potenzielle Ungenauigkeiten und falsche Informationen eingehen und sicherstellen, dass der Inhalt wissenschaftlich und seriös ist.</p>
+<h2 id="1-einführung-in-die-physikalische-Übertragung"><a class="header" href="#1-einführung-in-die-physikalische-Übertragung">1. Einführung in die physikalische Übertragung</a></h2>
+<p>Die physikalische Übertragung einer Nachricht im FlexRay-Netzwerk beginnt nicht direkt mit dem ersten Bit des Frame Headers, sondern mit einer speziellen Sequenz, der sogenannten <strong>Transmission Start Sequence (TSS)</strong>. Diese Sequenz dient dazu, sicherzustellen, dass alle Bits der Nachricht korrekt übertragen und empfangen werden können, insbesondere in einem FlexRay-Cluster mit aktiver Sterntopologie.</p>
+<h3 id="11-transmission-start-sequence-tss"><a class="header" href="#11-transmission-start-sequence-tss">1.1 Transmission Start Sequence (TSS)</a></h3>
+<p>Die TSS besteht aus einer Abfolge von Bits mit einem Low-Pegel, die dazu dient, dem aktiven Sternkoppler genügend Zeit zu geben, um in den aktiven Betriebszustand zu wechseln. Dieser Vorgang, bekannt als <strong>Star Truncation</strong>, benötigt eine gewisse Zeit, die durch die TSS abgedeckt wird. Die TSS muss dabei mindestens 3 und maximal 15 Bits umfassen, um die Anforderungen an die Star Truncation zu erfüllen.</p>
+<h3 id="12-frame-start-sequence-fss"><a class="header" href="#12-frame-start-sequence-fss">1.2 Frame Start Sequence (FSS)</a></h3>
+<p>Nach der TSS folgt die <strong>Frame Start Sequence (FSS)</strong>, die den Beginn der eigentlichen Nachrichtenübertragung signalisiert. Diese Sequenz markiert den Startpunkt des Headers.</p>
+<h3 id="13-byte-start-sequence-bss"><a class="header" href="#13-byte-start-sequence-bss">1.3 Byte Start Sequence (BSS)</a></h3>
+<p>Jedem zu übertragenden Byte wird eine <strong>Byte Start Sequence (BSS)</strong> vorangestellt. Diese Sequenz sorgt für einen Flankenwechsel, der vom Empfänger zur Nachsynchronisation genutzt wird. Dadurch wird sichergestellt, dass der Empfänger jedes Byte korrekt erkennt und synchronisiert bleibt.</p>
+<h3 id="14-frame-end-sequence-fes"><a class="header" href="#14-frame-end-sequence-fes">1.4 Frame End Sequence (FES)</a></h3>
+<p>Das Ende einer Nachricht wird durch die <strong>Frame End Sequence (FES)</strong> markiert. Diese Sequenz signalisiert dem Empfänger das Ende der Übertragung.</p>
+<h2 id="2-Übertragung-von-statischen-und-dynamischen-nachrichten"><a class="header" href="#2-Übertragung-von-statischen-und-dynamischen-nachrichten">2. Übertragung von statischen und dynamischen Nachrichten</a></h2>
+<h3 id="21-statische-nachrichten"><a class="header" href="#21-statische-nachrichten">2.1 Statische Nachrichten</a></h3>
+<p>Im statischen Segment des FlexRay-Netzwerks haben alle Nachrichten eine feste Struktur und Länge. Die Übertragung einer statischen Nachricht beginnt mit der TSS, gefolgt von der FSS, dem Header, dem Payload und der FES.</p>
+<h3 id="22-dynamische-nachrichten"><a class="header" href="#22-dynamische-nachrichten">2.2 Dynamische Nachrichten</a></h3>
+<p>Im dynamischen Segment können Nachrichten variable Längen haben. Ein entscheidender Unterschied zu statischen Nachrichten ist die sogenannte <strong>Dynamic Trailing Sequence</strong>, die sicherstellt, dass jede dynamische Nachricht genau am nächstmöglichen Action Point endet. Dies ermöglicht es jedem Empfänger, den Minislot zu bestimmen, in dem die dynamische Nachricht endete.</p>
+<h2 id="3-channel-idle-delimiter"><a class="header" href="#3-channel-idle-delimiter">3. Channel Idle Delimiter</a></h2>
+<p>Sowohl im statischen als auch im dynamischen Segment signalisiert der <strong>Channel Idle Delimiter</strong> (elf rezessive Bits), dass das Kommunikationsmedium wieder frei ist. Diese Sequenz zeigt an, dass die Übertragung abgeschlossen ist und das Medium von anderen Nachrichten verwendet werden kann.</p>
+<h2 id="4-grafische-darstellung"><a class="header" href="#4-grafische-darstellung">4. Grafische Darstellung</a></h2>
+<p>Zur Veranschaulichung der Codierung von Nachrichten stehen zwei Grafiken zur Verfügung:</p>
+<ol>
+<li><strong>Statische Botschaft</strong>: Diese Grafik zeigt eine statische Nachricht unter Berücksichtigung der zur physikalischen Übertragung notwendigen Codeelemente, einschließlich TSS, FSS, BSS und FES.</li>
+<li><strong>Dynamische Botschaft</strong>: Diese Grafik zeigt eine dynamische Nachricht unter Berücksichtigung der zur physikalischen Übertragung notwendigen Codeelemente sowie der Dynamic Trailing Sequence.</li>
+</ol>
+<h2 id="5-kritische-betrachtung"><a class="header" href="#5-kritische-betrachtung">5. Kritische Betrachtung</a></h2>
+<h3 id="51-notwendigkeit-der-tss"><a class="header" href="#51-notwendigkeit-der-tss">5.1 Notwendigkeit der TSS</a></h3>
+<p>Die TSS ist essentiell in einem FlexRay-Cluster mit aktiver Sterntopologie, da sie sicherstellt, dass der aktive Sternkoppler ausreichend Zeit hat, um in den Betriebszustand zu wechseln. Ohne die TSS könnten die ersten Bits der Nachricht verloren gehen, was zu Kommunikationsfehlern führen würde.</p>
+<h3 id="52-byte-start-sequence-und-synchronisation"><a class="header" href="#52-byte-start-sequence-und-synchronisation">5.2 Byte Start Sequence und Synchronisation</a></h3>
+<p>Die BSS ist ein wichtiger Mechanismus zur Sicherstellung der Synchronisation zwischen Sender und Empfänger. Ein fehlender oder falscher Flankenwechsel könnte zu Synchronisationsproblemen führen und die Integrität der übertragenen Daten gefährden.</p>
+<h3 id="53-dynamic-trailing-sequence-und-timing"><a class="header" href="#53-dynamic-trailing-sequence-und-timing">5.3 Dynamic Trailing Sequence und Timing</a></h3>
+<p>Die Dynamic Trailing Sequence ist kritisch für die genaue Bestimmung des Endes einer dynamischen Nachricht. Ohne diese Sequenz könnten Empfänger Schwierigkeiten haben, den genauen Zeitpunkt des Nachrichtenendes zu bestimmen, was die Zuverlässigkeit des Netzwerks beeinträchtigen könnte.</p>
+<h2 id="fazit"><a class="header" href="#fazit">Fazit</a></h2>
+<p>Das FlexRay-Kommunikationsprotokoll verwendet eine Vielzahl von speziellen Sequenzen zur Sicherstellung einer robusten und zuverlässigen Nachrichtenübertragung. Die präzise Implementierung dieser Sequenzen, einschließlich der TSS, FSS, BSS, FES und der Dynamic Trailing Sequence, ist entscheidend für die Integrität und Effizienz des FlexRay-Netzwerks. Durch die genaue Beachtung der Spezifikationen und die sorgfältige Planung können Systemdesigner sicherstellen, dass das FlexRay-Netzwerk optimal funktioniert und höchste Zuverlässigkeit bietet.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../04_Framing/02_frame-payload.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../05_Synchronisation/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../04_Framing/02_frame-payload.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../05_Synchronisation/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

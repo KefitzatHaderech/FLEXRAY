@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Phasen- und Frequenzkorrektur - FlexRay</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01_Einfuehrung/index.html"><strong aria-hidden="true">1.</strong> Einführung</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01_Einfuehrung/01_elektronische-assistenten.html"><strong aria-hidden="true">1.1.</strong> Elektronische Assistenten</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/02_brake-by-wire.html"><strong aria-hidden="true">1.2.</strong> Brake-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/03_steer-by-wire.html"><strong aria-hidden="true">1.3.</strong> Steer-by-Wire</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/04_sicherheit-fehlertoleranz.html"><strong aria-hidden="true">1.4.</strong> Sicherheit und Fehlertoleranz</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/05_zusammensetzbarkeit.html"><strong aria-hidden="true">1.5.</strong> Zusammensetzbarkeit</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/06_motivation-flexray.html"><strong aria-hidden="true">1.6.</strong> Motivation für FlexRay</a></li><li class="chapter-item expanded "><a href="../01_Einfuehrung/07_konsortium.html"><strong aria-hidden="true">1.7.</strong> FlexRay Konsortium</a></li></ol></li><li class="chapter-item expanded "><a href="../02_Kommunikation/index.html"><strong aria-hidden="true">2.</strong> Kommunikation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../02_Kommunikation/01_kommunikationsarchitektur.html"><strong aria-hidden="true">2.1.</strong> Kommunikationsarchitektur</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/02_passive-topologien.html"><strong aria-hidden="true">2.2.</strong> Passive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/03_aktive-topologien.html"><strong aria-hidden="true">2.3.</strong> Aktive Topologien</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/04_flexray-knoten.html"><strong aria-hidden="true">2.4.</strong> FlexRay Knoten</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/05_flexray-controller.html"><strong aria-hidden="true">2.5.</strong> FlexRay Controller</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/06_flexray-bus.html"><strong aria-hidden="true">2.6.</strong> FlexRay Bus</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/07_flexray-buspegel.html"><strong aria-hidden="true">2.7.</strong> FlexRay Buspegel</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/08_flexray-busankopplung.html"><strong aria-hidden="true">2.8.</strong> FlexRay Busankopplung</a></li><li class="chapter-item expanded "><a href="../02_Kommunikation/09_busguardian.html"><strong aria-hidden="true">2.9.</strong> Busguardian</a></li></ol></li><li class="chapter-item expanded "><a href="../03_Buszugriff/index.html"><strong aria-hidden="true">3.</strong> Buszugriff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03_Buszugriff/01_prinzip-buszugriff.html"><strong aria-hidden="true">3.1.</strong> Prinzip des Buszugriffs</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/02_kommunikationszyklus.html"><strong aria-hidden="true">3.2.</strong> Kommunikationszyklus</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/03_statisches-segment.html"><strong aria-hidden="true">3.3.</strong> Statisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/04_statischer-slot.html"><strong aria-hidden="true">3.4.</strong> Statischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/05_dynamisches-segment.html"><strong aria-hidden="true">3.5.</strong> Dynamisches Segment</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/06_dynamischer-slot.html"><strong aria-hidden="true">3.6.</strong> Dynamischer Slot</a></li><li class="chapter-item expanded "><a href="../03_Buszugriff/07_demonstration.html"><strong aria-hidden="true">3.7.</strong> Demonstration</a></li></ol></li><li class="chapter-item expanded "><a href="../04_Framing/index.html"><strong aria-hidden="true">4.</strong> Framing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04_Framing/01_frame-header.html"><strong aria-hidden="true">4.1.</strong> Frame Header</a></li><li class="chapter-item expanded "><a href="../04_Framing/02_frame-payload.html"><strong aria-hidden="true">4.2.</strong> Frame Payload</a></li><li class="chapter-item expanded "><a href="../04_Framing/03_codierung.html"><strong aria-hidden="true">4.3.</strong> Codierung</a></li></ol></li><li class="chapter-item expanded "><a href="../05_Synchronisation/index.html"><strong aria-hidden="true">5.</strong> Synchronisation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05_Synchronisation/01_synchronisationsprinzip.html"><strong aria-hidden="true">5.1.</strong> Synchronisationsprinzip</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/02_phasen-frequenzkorrektur.html" class="active"><strong aria-hidden="true">5.2.</strong> Phasen- und Frequenzkorrektur</a></li><li class="chapter-item expanded "><a href="../05_Synchronisation/03_synchronisationsmethode.html"><strong aria-hidden="true">5.3.</strong> Synchronisationsmethode</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FlexRay</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="flexray-uhrensynchronisation-ein-umfassendes-tutorial"><a class="header" href="#flexray-uhrensynchronisation-ein-umfassendes-tutorial">FlexRay-Uhrensynchronisation: Ein umfassendes Tutorial</a></h2>
+<h3 id="einleitung"><a class="header" href="#einleitung">Einleitung</a></h3>
+<p>FlexRay ist ein führendes Kommunikationsprotokoll für die Automobilindustrie, das besonders für seine hohe Zuverlässigkeit und Echtzeitfähigkeit geschätzt wird. Eine zentrale Herausforderung in FlexRay-Netzwerken ist die präzise Synchronisation der Uhren aller beteiligten Knoten. Dieses Tutorial erläutert die Methoden der Phasenkorrektur und Frequenzkorrektur zur Uhrensynchronisation in FlexRay-Systemen und geht auf deren Bedeutung und Umsetzung ein.</p>
+<h3 id="1-phasenkorrektur-in-flexray-systemen"><a class="header" href="#1-phasenkorrektur-in-flexray-systemen">1. Phasenkorrektur in FlexRay-Systemen</a></h3>
+<p>Die <strong>Phasenkorrektur</strong> stellt sicher, dass die lokalen Uhren aller FlexRay-Knoten dieselbe Phase besitzen, sodass die Kommunikationszyklen synchron beginnen. Dies ist von entscheidender Bedeutung, um eine einheitliche Zeitbasis im gesamten Netzwerk zu gewährleisten.</p>
+<h4 id="11-funktionsweise-der-phasenkorrektur"><a class="header" href="#11-funktionsweise-der-phasenkorrektur">1.1 Funktionsweise der Phasenkorrektur</a></h4>
+<p>Die Phasenkorrektur korrigiert die momentanen Unterschiede in den lokalen Zeitbasen der Knoten. Diese Unterschiede können durch minimale Abweichungen in den Taktsignalen entstehen. Ohne diese Korrektur würden die Kommunikationszyklen der einzelnen Knoten nicht perfekt synchron starten, was zu Datenverlusten und Kommunikationsfehlern führen könnte.</p>
+<h4 id="12-auswirkungen-ohne-phasenkorrektur"><a class="header" href="#12-auswirkungen-ohne-phasenkorrektur">1.2 Auswirkungen ohne Phasenkorrektur</a></h4>
+<p>Betrachten wir ein Szenario ohne Phasenkorrektur: Bei einer maximalen Abweichung von 3000 ppm (parts per million) und einer Zyklusdauer von 10 Millisekunden (ms) ergibt sich am Ende des Zyklus eine Drift von 30 Mikrosekunden (µs). Diese Drift könnte die maximal mögliche Datenrate erheblich reduzieren, da die einzelnen Knoten nicht mehr synchron arbeiten und somit ineffizienter Daten übertragen würden.</p>
+<h3 id="2-frequenzkorrektur-zur-verbesserung-der-bandbreiteneffizienz"><a class="header" href="#2-frequenzkorrektur-zur-verbesserung-der-bandbreiteneffizienz">2. Frequenzkorrektur zur Verbesserung der Bandbreiteneffizienz</a></h3>
+<p>Während die Phasenkorrektur die unmittelbaren Symptome von Frequenzabweichungen behandelt, geht die <strong>Frequenzkorrektur</strong> die Ursache dieser Abweichungen an. Dies führt zu einer signifikanten Verbesserung der Bandbreiteneffizienz des gesamten Systems.</p>
+<h4 id="21-herausforderungen-bei-der-frequenzkorrektur"><a class="header" href="#21-herausforderungen-bei-der-frequenzkorrektur">2.1 Herausforderungen bei der Frequenzkorrektur</a></h4>
+<p>Die Frequenz eines Quarzes, der als Taktgeber dient, kann nicht direkt beeinflusst werden. Daher wird ein Frequenzteiler eingesetzt, der die Quarzfrequenz in die lokale Zeitbasis des FlexRay-Knotens umsetzt. Durch die Anpassung des Teilverhältnisses dieses Frequenzteilers können die lokalen Uhren beschleunigt oder verlangsamt werden, um eine einheitliche Zykluslänge für alle Knoten zu gewährleisten.</p>
+<h4 id="22-funktionsweise-der-frequenzkorrektur"><a class="header" href="#22-funktionsweise-der-frequenzkorrektur">2.2 Funktionsweise der Frequenzkorrektur</a></h4>
+<p>Der Frequenzteiler ermöglicht eine Feinabstimmung der Taktfrequenzen der Knoten. Dies bedeutet, dass alle lokalen Uhren nahezu mit der gleichen Geschwindigkeit laufen, was entscheidend für die Synchronisation der Kommunikationszyklen ist. Selbst bei transienten Störungen bleibt die Abweichung der lokalen Uhren innerhalb definierter Grenzen, wodurch die Uhrensynchronisation robust bleibt.</p>
+<h3 id="3-robustheit-der-uhrensynchronisation-durch-frequenzkorrektur"><a class="header" href="#3-robustheit-der-uhrensynchronisation-durch-frequenzkorrektur">3. Robustheit der Uhrensynchronisation durch Frequenzkorrektur</a></h3>
+<p>Die Frequenzkorrektur macht die Uhrensynchronisation in einem FlexRay-Cluster besonders robust gegenüber transienten Störungen. Dies bedeutet, dass der Ausfall der Synchronisationsbotschaften über mehrere Kommunikationszyklen hinweg toleriert werden kann, ohne dass die Synchronisation der Uhren verloren geht.</p>
+<h4 id="31-vorteile-der-frequenzkorrektur"><a class="header" href="#31-vorteile-der-frequenzkorrektur">3.1 Vorteile der Frequenzkorrektur</a></h4>
+<ul>
+<li><strong>Erhöhte Zuverlässigkeit</strong>: Die Frequenzkorrektur trägt wesentlich zur Zuverlässigkeit des FlexRay-Systems bei, da sie sicherstellt, dass die lokalen Uhren auch bei Störungen synchron bleiben.</li>
+<li><strong>Verbesserte Bandbreiteneffizienz</strong>: Durch die präzise Synchronisation können Daten effizienter übertragen werden, was die Gesamtbandbreite des Systems erhöht.</li>
+<li><strong>Toleranz gegenüber Störungen</strong>: Die Uhrensynchronisation bleibt auch bei vorübergehenden Ausfällen der Synchronisationsbotschaften stabil, was die Robustheit des Systems erhöht.</li>
+</ul>
+<h3 id="fazit"><a class="header" href="#fazit">Fazit</a></h3>
+<p>Die präzise Synchronisation der lokalen Uhren in FlexRay-Systemen ist entscheidend für deren Leistung und Zuverlässigkeit. Die Kombination aus Phasenkorrektur und Frequenzkorrektur gewährleistet, dass alle Knoten synchron arbeiten, wodurch die Kommunikationszyklen effizient und robust gegenüber Störungen bleiben. Durch diese Methoden wird die Bandbreiteneffizienz maximiert und die Ausfallsicherheit des gesamten Systems erhöht.</p>
+<h3 id="quellen-und-weiterführende-literatur"><a class="header" href="#quellen-und-weiterführende-literatur">Quellen und weiterführende Literatur</a></h3>
+<p>Für eine vertiefte Auseinandersetzung mit dem Thema empfehle ich folgende Literatur:</p>
+<ol>
+<li><strong>FlexRay Communications System – Protocol Specification Version 3.0.1</strong>: Detaillierte technische Spezifikation des FlexRay-Protokolls.</li>
+<li><strong>Automotive Ethernet - The Definitive Guide</strong>: Ein umfassendes Werk über die Netzwerkprotokolle in modernen Fahrzeugen, einschließlich FlexRay.</li>
+<li><strong>Introduction to Embedded Systems – Using ANSI C and the Arduino Development Environment</strong>: Einführendes Buch, das auch die Grundlagen der Echtzeitsysteme und ihrer Synchronisation behandelt.</li>
+</ol>
+<p>Durch die Anwendung dieser Techniken wird die Uhrensynchronisation in FlexRay-Systemen effizient und robust, was die Grundlage für die zuverlässige Kommunikation in modernen Fahrzeugen bildet.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../05_Synchronisation/01_synchronisationsprinzip.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../05_Synchronisation/03_synchronisationsmethode.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../05_Synchronisation/01_synchronisationsprinzip.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../05_Synchronisation/03_synchronisationsmethode.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
